@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.person.mapper.VrPatientMapper">
+    
+    <resultMap type="VrPatient" id="VrPatientResult">
+        <result property="patientId"    column="patient_id"    />
+        <result property="hospitalId"    column="hospital_id"    />
+        <result property="name"    column="name"    />
+        <result property="openid"    column="openid"    />
+        <result property="mobile"    column="mobile"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="password"    column="password"    />
+        <result property="sex"    column="sex"    />
+        <result property="birthday"    column="birthday"    />
+        <result property="idCard"    column="id_card"    />
+        <result property="mobile1"    column="mobile1"    />
+        <result property="isFinal"    column="is_final"    />
+        <result property="lastLoginIp"    column="last_login_ip"    />
+        <result property="lastLoginTime"    column="last_login_time"    />
+        <result property="address"    column="address"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="provinceId"    column="province_id"    />
+        <result property="cityId"    column="city_id"    />
+        <result property="districtId"    column="district_id"    />
+        <result property="allergyInfo"    column="allergy_info"    />
+        <result property="isDel"    column="is_del"    />
+    </resultMap>
+
+    <sql id="selectVrPatientVo">
+        select patient_id, hospital_id, name, openid, mobile, update_time, password, sex, birthday, id_card, mobile1, is_final, last_login_ip, last_login_time, address, create_time, province_id, city_id, district_id, allergy_info, is_del from vr_patient
+    </sql>
+
+    <select id="selectVrPatientList" parameterType="VrPatient" resultMap="VrPatientResult">
+        <include refid="selectVrPatientVo"/>
+        <where>  
+            <if test="hospitalId != null "> and hospital_id = #{hospitalId}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="openid != null  and openid != ''"> and openid = #{openid}</if>
+            <if test="mobile != null  and mobile != ''"> and mobile = #{mobile}</if>
+            <if test="password != null  and password != ''"> and password = #{password}</if>
+            <if test="sex != null "> and sex = #{sex}</if>
+            <if test="birthday != null  and birthday != ''"> and birthday = #{birthday}</if>
+            <if test="idCard != null  and idCard != ''"> and id_card = #{idCard}</if>
+            <if test="mobile1 != null  and mobile1 != ''"> and mobile1 = #{mobile1}</if>
+            <if test="isFinal != null "> and is_final = #{isFinal}</if>
+            <if test="lastLoginIp != null "> and last_login_ip = #{lastLoginIp}</if>
+            <if test="lastLoginTime != null "> and last_login_time = #{lastLoginTime}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="provinceId != null "> and province_id = #{provinceId}</if>
+            <if test="cityId != null "> and city_id = #{cityId}</if>
+            <if test="districtId != null "> and district_id = #{districtId}</if>
+            <if test="allergyInfo != null  and allergyInfo != ''"> and allergy_info = #{allergyInfo}</if>
+            <if test="isDel != null "> and is_del = #{isDel}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrPatientByPatientId" parameterType="Long" resultMap="VrPatientResult">
+        <include refid="selectVrPatientVo"/>
+        where patient_id = #{patientId}
+    </select>
+        
+    <insert id="insertVrPatient" parameterType="VrPatient" useGeneratedKeys="true" keyProperty="patientId">
+        insert into vr_patient
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="hospitalId != null">hospital_id,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="openid != null">openid,</if>
+            <if test="mobile != null and mobile != ''">mobile,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="password != null">password,</if>
+            <if test="sex != null">sex,</if>
+            <if test="birthday != null">birthday,</if>
+            <if test="idCard != null">id_card,</if>
+            <if test="mobile1 != null">mobile1,</if>
+            <if test="isFinal != null">is_final,</if>
+            <if test="lastLoginIp != null">last_login_ip,</if>
+            <if test="lastLoginTime != null">last_login_time,</if>
+            <if test="address != null">address,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="provinceId != null">province_id,</if>
+            <if test="cityId != null">city_id,</if>
+            <if test="districtId != null">district_id,</if>
+            <if test="allergyInfo != null">allergy_info,</if>
+            <if test="isDel != null">is_del,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="hospitalId != null">#{hospitalId},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="openid != null">#{openid},</if>
+            <if test="mobile != null and mobile != ''">#{mobile},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="password != null">#{password},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="birthday != null">#{birthday},</if>
+            <if test="idCard != null">#{idCard},</if>
+            <if test="mobile1 != null">#{mobile1},</if>
+            <if test="isFinal != null">#{isFinal},</if>
+            <if test="lastLoginIp != null">#{lastLoginIp},</if>
+            <if test="lastLoginTime != null">#{lastLoginTime},</if>
+            <if test="address != null">#{address},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="provinceId != null">#{provinceId},</if>
+            <if test="cityId != null">#{cityId},</if>
+            <if test="districtId != null">#{districtId},</if>
+            <if test="allergyInfo != null">#{allergyInfo},</if>
+            <if test="isDel != null">#{isDel},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrPatient" parameterType="VrPatient">
+        update vr_patient
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="hospitalId != null">hospital_id = #{hospitalId},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="openid != null">openid = #{openid},</if>
+            <if test="mobile != null and mobile != ''">mobile = #{mobile},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="birthday != null">birthday = #{birthday},</if>
+            <if test="idCard != null">id_card = #{idCard},</if>
+            <if test="mobile1 != null">mobile1 = #{mobile1},</if>
+            <if test="isFinal != null">is_final = #{isFinal},</if>
+            <if test="lastLoginIp != null">last_login_ip = #{lastLoginIp},</if>
+            <if test="lastLoginTime != null">last_login_time = #{lastLoginTime},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="provinceId != null">province_id = #{provinceId},</if>
+            <if test="cityId != null">city_id = #{cityId},</if>
+            <if test="districtId != null">district_id = #{districtId},</if>
+            <if test="allergyInfo != null">allergy_info = #{allergyInfo},</if>
+            <if test="isDel != null">is_del = #{isDel},</if>
+        </trim>
+        where patient_id = #{patientId}
+    </update>
+
+    <delete id="deleteVrPatientByPatientId" parameterType="Long">
+        delete from vr_patient where patient_id = #{patientId}
+    </delete>
+
+    <delete id="deleteVrPatientByPatientIds" parameterType="String">
+        delete from vr_patient where patient_id in 
+        <foreach item="patientId" collection="array" open="(" separator="," close=")">
+            #{patientId}
+        </foreach>
+    </delete>
+</mapper>

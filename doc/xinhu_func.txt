@@ -1,0 +1,146 @@
+菜单
+xinhu_admin   用户表
+xinhu_areas 区域表
+xinhu_assetm  固定资产表
+xinhu_book 图书表
+xinhu_bookborrow   图书借阅
+xinhu_carm   车辆表
+xinhu_carmang 车辆维修保养记录表
+xinhu_carmrese 车辆预定
+xinhu_carms 车辆信息登记表
+xinhu_chargems  系统升级
+xinhu_city    城市表
+xinhu_company  公司单位表
+xinhu_custappy   客户申请使用
+xinhu_custfina   客户收付款
+xinhu_customer   客户
+xinhu_custplan   跟进计划
+xinhu_custract   客户合同
+xinhu_custsale   销售机会
+xinhu_daily      日报
+xinhu_dailyfx    日报分析统计表
+xinhu_demo       演示测试模块
+xinhu_dept       组织结构部门
+xinhu_editrecord     修改记录表
+xinhu_emailm     邮件主表
+xinhu_emails     邮件子表
+xinhu_email_cont    系统发送邮件内容
+xinhu_file       上传文件记录表
+xinhu_files      文件记录下载和预览
+xinhu_fininfom   费用报销
+xinhu_fininfos   费用报销子表
+xinhu_finpiao    发票管理表
+xinhu_flow_bill  流程单据
+xinhu_flow_chao  抄送表
+xinhu_flow_checks  单据的审核人
+xinhu_flow_cname    自定义审核人组
+xinhu_flow_course   流程步骤表
+xinhu_flow_element  模块元素
+xinhu_flow_extent   模块权限
+xinhu_flow_log       单据操作记录
+xinhu_flow_modetpl    模块多模版设置表
+xinhu_flow_remind    单据提醒设置表
+xinhu_flow_set        流程模块
+xinhu_flow_todo      单据通知设置表
+xinhu_flow_todos     单据通知给对应人员
+xinhu_flow_where     单据条件
+xinhu_gctodo        工程通知
+xinhu_godepot       物品仓库表
+xinhu_goodm       物品领用采购申请主表
+xinhu_goodn      物品库存详细表
+xinhu_goods      物品表
+xinhu_goodss     物品库存详细表
+xinhu_group      系统组
+xinhu_homeitems   桌面项目表
+xinhu_hrcheck     考核评分表
+xinhu_hrcheckn    考核评分记录
+xinhu_hrchecks    考评内容
+xinhu_hrdemint    面试和人员需求表
+xinhu_hrkaohem    考核项目
+xinhu_hrkaohen    考核项目人员
+xinhu_hrkaohes    考核项目的内容
+xinhu_hrpositive   HR转正
+xinhu_hrredund     离职申请
+xinhu_hrsalarm     薪资模版
+xinhu_hrsalars     薪资模版子表
+xinhu_hrsalary     工资表
+xinhu_hrshebao     社保公积金
+xinhu_hrtransfer    职位调动
+xinhu_hrtrsalary    调薪申请
+xinhu_im_group      IM会话表
+xinhu_im_groupuser    IM会话人员
+xinhu_im_history      IM会话记录历史表
+xinhu_im_menu        IM下应用菜单
+xinhu_im_mess       IM聊天记录表
+xinhu_im_messzt     IM聊天消息状态表
+xinhu_infor         通知公告
+xinhu_infors        信息子表投票项
+xinhu_knowledge     知识信息
+xinhu_knowtiku      知识题库
+xinhu_knowtraim     培训表出题考试
+xinhu_knowtrais     考试培训子表
+xinhu_kqanay        考勤分析
+xinhu_kqdist        考勤分配表
+xinhu_kqdisv     考勤排班
+xinhu_kqdkjl     打卡记录
+xinhu_kqdw      考勤定位规则
+xinhu_kqerr      打卡异常申请
+xinhu_kqinfo    请假条加班单
+xinhu_kqjcmd    考勤机命令发送表
+xinhu_kqjsn     考勤机设备表
+xinhu_kqjuser    考勤机上人员
+xinhu_kqout      外出出差
+xinhu_kqsjgz    考勤时间规则
+xinhu_kqxxsj    休息时间规则
+xinhu_location    外勤定位
+xinhu_log         系统日志
+xinhu_logintoken     系统登录token
+xinhu_meet           会议
+xinhu_menu          系统菜单
+xinhu_news         新闻资讯
+xinhu_official     公文
+xinhu_option      系统选项
+xinhu_project     项目表
+xinhu_reads      单据浏览记录表
+xinhu_receipt     回执确认表
+xinhu_repair     维修报修
+xinhu_reward     奖惩
+xinhu_scheduld   日程待办
+xinhu_schedule   日程
+xinhu_seal     印章表
+xinhu_sealapl   印章申请使用表
+xinhu_sjoin     后台菜单权限
+xinhu_subscribe    订阅管理表
+xinhu_subscribeinfo     订阅内容信息
+xinhu_task       计划任务
+xinhu_todo       提醒消息表
+xinhu_tovoid     单据申请作废表
+xinhu_userinfo    用户档案表
+xinhu_userinfos    人员档案子表
+xinhu_userract      用户合同表
+xinhu_userzheng    说明
+xinhu_vcard      个人通讯录
+xinhu_wenjuan    问卷表
+xinhu_wenjuat    问卷表子表
+xinhu_wenjuau    问卷表子表
+xinhu_worc       文档分区表
+xinhu_word       文档表
+xinhu_wordeil    文件传送
+xinhu_wordxie   文档协作
+xinhu_work    任务
+xinhu_wotpl    微信公众号消息模版
+xinhu_wouser    微信用户信息表
+xinhu_wxtx_renlian   人脸识别
+xinhu_zreim_user     REIM即时通讯平台用户
+
+
+模块
+xinhu-customer
+xinhu-document
+xinhu-finance
+xinhu-flow
+xinhu-hr
+xinhu-person
+xinhu-police
+xinhu-resources
+xinhu-system

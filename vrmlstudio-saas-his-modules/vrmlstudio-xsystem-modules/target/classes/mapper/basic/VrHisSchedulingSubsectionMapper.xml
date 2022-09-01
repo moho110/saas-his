@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.xsystem.mapper.VrHisSchedulingSubsectionMapper">
+    
+    <resultMap type="VrHisSchedulingSubsection" id="VrHisSchedulingSubsectionResult">
+        <result property="schedulingSubsectionId"    column="scheduling_subsection_id"    />
+        <result property="subsectionType"    column="subsection_type"    />
+        <result property="schedulingId"    column="scheduling_id"    />
+    </resultMap>
+
+    <sql id="selectVrHisSchedulingSubsectionVo">
+        select scheduling_subsection_id, subsection_type, scheduling_id from vr_his_scheduling_subsection
+    </sql>
+
+    <select id="selectVrHisSchedulingSubsectionList" parameterType="VrHisSchedulingSubsection" resultMap="VrHisSchedulingSubsectionResult">
+        <include refid="selectVrHisSchedulingSubsectionVo"/>
+        <where>  
+            <if test="subsectionType != null "> and subsection_type = #{subsectionType}</if>
+            <if test="schedulingId != null "> and scheduling_id = #{schedulingId}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisSchedulingSubsectionBySchedulingSubsectionId" parameterType="Integer" resultMap="VrHisSchedulingSubsectionResult">
+        <include refid="selectVrHisSchedulingSubsectionVo"/>
+        where scheduling_subsection_id = #{schedulingSubsectionId}
+    </select>
+        
+    <insert id="insertVrHisSchedulingSubsection" parameterType="VrHisSchedulingSubsection" useGeneratedKeys="true" keyProperty="schedulingSubsectionId">
+        insert into vr_his_scheduling_subsection
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="subsectionType != null">subsection_type,</if>
+            <if test="schedulingId != null">scheduling_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="subsectionType != null">#{subsectionType},</if>
+            <if test="schedulingId != null">#{schedulingId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisSchedulingSubsection" parameterType="VrHisSchedulingSubsection">
+        update vr_his_scheduling_subsection
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="subsectionType != null">subsection_type = #{subsectionType},</if>
+            <if test="schedulingId != null">scheduling_id = #{schedulingId},</if>
+        </trim>
+        where scheduling_subsection_id = #{schedulingSubsectionId}
+    </update>
+
+    <delete id="deleteVrHisSchedulingSubsectionBySchedulingSubsectionId" parameterType="Integer">
+        delete from vr_his_scheduling_subsection where scheduling_subsection_id = #{schedulingSubsectionId}
+    </delete>
+
+    <delete id="deleteVrHisSchedulingSubsectionBySchedulingSubsectionIds" parameterType="String">
+        delete from vr_his_scheduling_subsection where scheduling_subsection_id in 
+        <foreach item="schedulingSubsectionId" collection="array" open="(" separator="," close=")">
+            #{schedulingSubsectionId}
+        </foreach>
+    </delete>
+</mapper>

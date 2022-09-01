@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.xsystem.mapper.VrHisTransactionRecordMapper">
+    
+    <resultMap type="VrHisTransactionRecord" id="VrHisTransactionRecordResult">
+        <result property="id"    column="id"    />
+        <result property="operatorId"    column="operator_id"    />
+        <result property="hospitalId"    column="hospital_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="typeId"    column="type_id"    />
+        <result property="amount"    column="amount"    />
+        <result property="moneyBalance"    column="money_balance"    />
+        <result property="moneyLock"    column="money_lock"    />
+        <result property="addtime"    column="addtime"    />
+        <result property="ip"    column="ip"    />
+        <result property="memo"    column="memo"    />
+        <result property="pkgId"    column="pkg_id"    />
+    </resultMap>
+
+    <sql id="selectVrHisTransactionRecordVo">
+        select id, operator_id, hospital_id, user_id, type_id, amount, money_balance, money_lock, addtime, ip, memo, pkg_id from vr_his_transaction_record
+    </sql>
+
+    <select id="selectVrHisTransactionRecordList" parameterType="VrHisTransactionRecord" resultMap="VrHisTransactionRecordResult">
+        <include refid="selectVrHisTransactionRecordVo"/>
+        <where>  
+            <if test="operatorId != null "> and operator_id = #{operatorId}</if>
+            <if test="hospitalId != null "> and hospital_id = #{hospitalId}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="typeId != null "> and type_id = #{typeId}</if>
+            <if test="amount != null "> and amount = #{amount}</if>
+            <if test="moneyBalance != null "> and money_balance = #{moneyBalance}</if>
+            <if test="moneyLock != null "> and money_lock = #{moneyLock}</if>
+            <if test="addtime != null "> and addtime = #{addtime}</if>
+            <if test="ip != null  and ip != ''"> and ip = #{ip}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+            <if test="pkgId != null "> and pkg_id = #{pkgId}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisTransactionRecordById" parameterType="Integer" resultMap="VrHisTransactionRecordResult">
+        <include refid="selectVrHisTransactionRecordVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertVrHisTransactionRecord" parameterType="VrHisTransactionRecord" useGeneratedKeys="true" keyProperty="id">
+        insert into vr_his_transaction_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="operatorId != null">operator_id,</if>
+            <if test="hospitalId != null">hospital_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="typeId != null">type_id,</if>
+            <if test="amount != null">amount,</if>
+            <if test="moneyBalance != null">money_balance,</if>
+            <if test="moneyLock != null">money_lock,</if>
+            <if test="addtime != null">addtime,</if>
+            <if test="ip != null">ip,</if>
+            <if test="memo != null">memo,</if>
+            <if test="pkgId != null">pkg_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="operatorId != null">#{operatorId},</if>
+            <if test="hospitalId != null">#{hospitalId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="typeId != null">#{typeId},</if>
+            <if test="amount != null">#{amount},</if>
+            <if test="moneyBalance != null">#{moneyBalance},</if>
+            <if test="moneyLock != null">#{moneyLock},</if>
+            <if test="addtime != null">#{addtime},</if>
+            <if test="ip != null">#{ip},</if>
+            <if test="memo != null">#{memo},</if>
+            <if test="pkgId != null">#{pkgId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisTransactionRecord" parameterType="VrHisTransactionRecord">
+        update vr_his_transaction_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="operatorId != null">operator_id = #{operatorId},</if>
+            <if test="hospitalId != null">hospital_id = #{hospitalId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="typeId != null">type_id = #{typeId},</if>
+            <if test="amount != null">amount = #{amount},</if>
+            <if test="moneyBalance != null">money_balance = #{moneyBalance},</if>
+            <if test="moneyLock != null">money_lock = #{moneyLock},</if>
+            <if test="addtime != null">addtime = #{addtime},</if>
+            <if test="ip != null">ip = #{ip},</if>
+            <if test="memo != null">memo = #{memo},</if>
+            <if test="pkgId != null">pkg_id = #{pkgId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteVrHisTransactionRecordById" parameterType="Integer">
+        delete from vr_his_transaction_record where id = #{id}
+    </delete>
+
+    <delete id="deleteVrHisTransactionRecordByIds" parameterType="String">
+        delete from vr_his_transaction_record where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

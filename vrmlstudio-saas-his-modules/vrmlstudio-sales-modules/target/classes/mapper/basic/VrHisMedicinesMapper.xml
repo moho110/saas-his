@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.sales.mapper.VrHisMedicinesMapper">
+    
+    <resultMap type="VrHisMedicines" id="VrHisMedicinesResult">
+        <result property="medicinesId"    column="medicines_id"    />
+        <result property="medicinesNumber"    column="medicines_number"    />
+        <result property="medicinesName"    column="medicines_name"    />
+        <result property="medicinesClass"    column="medicines_class"    />
+        <result property="prescriptionType"    column="prescription_type"    />
+        <result property="unit"    column="unit"    />
+        <result property="conversion"    column="conversion"    />
+        <result property="keywords"    column="keywords"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="producter"    column="producter"    />
+    </resultMap>
+
+    <sql id="selectVrHisMedicinesVo">
+        select medicines_id, medicines_number, medicines_name, medicines_class, prescription_type, unit, conversion, keywords, create_time, update_time, producter from vr_his_medicines
+    </sql>
+
+    <select id="selectVrHisMedicinesList" parameterType="VrHisMedicines" resultMap="VrHisMedicinesResult">
+        <include refid="selectVrHisMedicinesVo"/>
+        <where>  
+            <if test="medicinesNumber != null  and medicinesNumber != ''"> and medicines_number = #{medicinesNumber}</if>
+            <if test="medicinesName != null  and medicinesName != ''"> and medicines_name like concat('%', #{medicinesName}, '%')</if>
+            <if test="medicinesClass != null  and medicinesClass != ''"> and medicines_class = #{medicinesClass}</if>
+            <if test="prescriptionType != null  and prescriptionType != ''"> and prescription_type = #{prescriptionType}</if>
+            <if test="unit != null  and unit != ''"> and unit = #{unit}</if>
+            <if test="conversion != null "> and conversion = #{conversion}</if>
+            <if test="keywords != null  and keywords != ''"> and keywords = #{keywords}</if>
+            <if test="producter != null  and producter != ''"> and producter = #{producter}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisMedicinesByMedicinesId" parameterType="Integer" resultMap="VrHisMedicinesResult">
+        <include refid="selectVrHisMedicinesVo"/>
+        where medicines_id = #{medicinesId}
+    </select>
+        
+    <insert id="insertVrHisMedicines" parameterType="VrHisMedicines" useGeneratedKeys="true" keyProperty="medicinesId">
+        insert into vr_his_medicines
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="medicinesNumber != null and medicinesNumber != ''">medicines_number,</if>
+            <if test="medicinesName != null and medicinesName != ''">medicines_name,</if>
+            <if test="medicinesClass != null and medicinesClass != ''">medicines_class,</if>
+            <if test="prescriptionType != null and prescriptionType != ''">prescription_type,</if>
+            <if test="unit != null and unit != ''">unit,</if>
+            <if test="conversion != null">conversion,</if>
+            <if test="keywords != null and keywords != ''">keywords,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="producter != null">producter,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="medicinesNumber != null and medicinesNumber != ''">#{medicinesNumber},</if>
+            <if test="medicinesName != null and medicinesName != ''">#{medicinesName},</if>
+            <if test="medicinesClass != null and medicinesClass != ''">#{medicinesClass},</if>
+            <if test="prescriptionType != null and prescriptionType != ''">#{prescriptionType},</if>
+            <if test="unit != null and unit != ''">#{unit},</if>
+            <if test="conversion != null">#{conversion},</if>
+            <if test="keywords != null and keywords != ''">#{keywords},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="producter != null">#{producter},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisMedicines" parameterType="VrHisMedicines">
+        update vr_his_medicines
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="medicinesNumber != null and medicinesNumber != ''">medicines_number = #{medicinesNumber},</if>
+            <if test="medicinesName != null and medicinesName != ''">medicines_name = #{medicinesName},</if>
+            <if test="medicinesClass != null and medicinesClass != ''">medicines_class = #{medicinesClass},</if>
+            <if test="prescriptionType != null and prescriptionType != ''">prescription_type = #{prescriptionType},</if>
+            <if test="unit != null and unit != ''">unit = #{unit},</if>
+            <if test="conversion != null">conversion = #{conversion},</if>
+            <if test="keywords != null and keywords != ''">keywords = #{keywords},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="producter != null">producter = #{producter},</if>
+        </trim>
+        where medicines_id = #{medicinesId}
+    </update>
+
+    <delete id="deleteVrHisMedicinesByMedicinesId" parameterType="Integer">
+        delete from vr_his_medicines where medicines_id = #{medicinesId}
+    </delete>
+
+    <delete id="deleteVrHisMedicinesByMedicinesIds" parameterType="String">
+        delete from vr_his_medicines where medicines_id in 
+        <foreach item="medicinesId" collection="array" open="(" separator="," close=")">
+            #{medicinesId}
+        </foreach>
+    </delete>
+</mapper>

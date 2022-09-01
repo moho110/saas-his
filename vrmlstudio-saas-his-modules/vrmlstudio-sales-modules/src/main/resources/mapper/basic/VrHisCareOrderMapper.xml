@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.sales.mapper.VrHisCareOrderMapper">
+    
+    <resultMap type="VrHisCareOrder" id="VrHisCareOrderResult">
+        <result property="id"    column="id"    />
+        <result property="hospitalId"    column="hospital_id"    />
+        <result property="doctorId"    column="doctor_id"    />
+        <result property="patientId"    column="patient_id"    />
+        <result property="careHistoryId"    column="care_history_id"    />
+        <result property="pkgId"    column="pkg_id"    />
+        <result property="status"    column="status"    />
+        <result property="label"    column="label"    />
+        <result property="numA"    column="num_a"    />
+        <result property="numB"    column="num_b"    />
+        <result property="numC"    column="num_c"    />
+        <result property="numD"    column="num_d"    />
+        <result property="amount"    column="amount"    />
+        <result property="allAmount"    column="all_amount"    />
+        <result property="addtime"    column="addtime"    />
+        <result property="caseCode"    column="case_code"    />
+        <result property="useTips"    column="use_tips"    />
+        <result property="memo"    column="memo"    />
+    </resultMap>
+
+    <sql id="selectVrHisCareOrderVo">
+        select id, hospital_id, doctor_id, patient_id, care_history_id, pkg_id, status, label, num_a, num_b, num_c, num_d, amount, all_amount, addtime, case_code, use_tips, memo from vr_his_care_order
+    </sql>
+
+    <select id="selectVrHisCareOrderList" parameterType="VrHisCareOrder" resultMap="VrHisCareOrderResult">
+        <include refid="selectVrHisCareOrderVo"/>
+        <where>  
+            <if test="hospitalId != null "> and hospital_id = #{hospitalId}</if>
+            <if test="doctorId != null "> and doctor_id = #{doctorId}</if>
+            <if test="patientId != null "> and patient_id = #{patientId}</if>
+            <if test="careHistoryId != null "> and care_history_id = #{careHistoryId}</if>
+            <if test="pkgId != null "> and pkg_id = #{pkgId}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="label != null  and label != ''"> and label = #{label}</if>
+            <if test="numA != null "> and num_a = #{numA}</if>
+            <if test="numB != null "> and num_b = #{numB}</if>
+            <if test="numC != null "> and num_c = #{numC}</if>
+            <if test="numD != null "> and num_d = #{numD}</if>
+            <if test="amount != null "> and amount = #{amount}</if>
+            <if test="allAmount != null "> and all_amount = #{allAmount}</if>
+            <if test="addtime != null "> and addtime = #{addtime}</if>
+            <if test="caseCode != null  and caseCode != ''"> and case_code = #{caseCode}</if>
+            <if test="useTips != null  and useTips != ''"> and use_tips = #{useTips}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisCareOrderById" parameterType="Integer" resultMap="VrHisCareOrderResult">
+        <include refid="selectVrHisCareOrderVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertVrHisCareOrder" parameterType="VrHisCareOrder" useGeneratedKeys="true" keyProperty="id">
+        insert into vr_his_care_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="hospitalId != null">hospital_id,</if>
+            <if test="doctorId != null">doctor_id,</if>
+            <if test="patientId != null">patient_id,</if>
+            <if test="careHistoryId != null">care_history_id,</if>
+            <if test="pkgId != null">pkg_id,</if>
+            <if test="status != null">status,</if>
+            <if test="label != null">label,</if>
+            <if test="numA != null">num_a,</if>
+            <if test="numB != null">num_b,</if>
+            <if test="numC != null">num_c,</if>
+            <if test="numD != null">num_d,</if>
+            <if test="amount != null">amount,</if>
+            <if test="allAmount != null">all_amount,</if>
+            <if test="addtime != null">addtime,</if>
+            <if test="caseCode != null">case_code,</if>
+            <if test="useTips != null">use_tips,</if>
+            <if test="memo != null">memo,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="hospitalId != null">#{hospitalId},</if>
+            <if test="doctorId != null">#{doctorId},</if>
+            <if test="patientId != null">#{patientId},</if>
+            <if test="careHistoryId != null">#{careHistoryId},</if>
+            <if test="pkgId != null">#{pkgId},</if>
+            <if test="status != null">#{status},</if>
+            <if test="label != null">#{label},</if>
+            <if test="numA != null">#{numA},</if>
+            <if test="numB != null">#{numB},</if>
+            <if test="numC != null">#{numC},</if>
+            <if test="numD != null">#{numD},</if>
+            <if test="amount != null">#{amount},</if>
+            <if test="allAmount != null">#{allAmount},</if>
+            <if test="addtime != null">#{addtime},</if>
+            <if test="caseCode != null">#{caseCode},</if>
+            <if test="useTips != null">#{useTips},</if>
+            <if test="memo != null">#{memo},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisCareOrder" parameterType="VrHisCareOrder">
+        update vr_his_care_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="hospitalId != null">hospital_id = #{hospitalId},</if>
+            <if test="doctorId != null">doctor_id = #{doctorId},</if>
+            <if test="patientId != null">patient_id = #{patientId},</if>
+            <if test="careHistoryId != null">care_history_id = #{careHistoryId},</if>
+            <if test="pkgId != null">pkg_id = #{pkgId},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="label != null">label = #{label},</if>
+            <if test="numA != null">num_a = #{numA},</if>
+            <if test="numB != null">num_b = #{numB},</if>
+            <if test="numC != null">num_c = #{numC},</if>
+            <if test="numD != null">num_d = #{numD},</if>
+            <if test="amount != null">amount = #{amount},</if>
+            <if test="allAmount != null">all_amount = #{allAmount},</if>
+            <if test="addtime != null">addtime = #{addtime},</if>
+            <if test="caseCode != null">case_code = #{caseCode},</if>
+            <if test="useTips != null">use_tips = #{useTips},</if>
+            <if test="memo != null">memo = #{memo},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteVrHisCareOrderById" parameterType="Integer">
+        delete from vr_his_care_order where id = #{id}
+    </delete>
+
+    <delete id="deleteVrHisCareOrderByIds" parameterType="String">
+        delete from vr_his_care_order where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

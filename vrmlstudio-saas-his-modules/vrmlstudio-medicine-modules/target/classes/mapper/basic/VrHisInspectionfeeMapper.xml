@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.medicine.mapper.VrHisInspectionfeeMapper">
+    
+    <resultMap type="VrHisInspectionfee" id="VrHisInspectionfeeResult">
+        <result property="insId"    column="ins_id"    />
+        <result property="mid"    column="mid"    />
+        <result property="hid"    column="hid"    />
+        <result property="inspectionName"    column="inspection_name"    />
+        <result property="class"    column="class"    />
+        <result property="unitPrice"    column="unit_price"    />
+        <result property="cost"    column="cost"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="unit"    column="unit"    />
+        <result property="classId"    column="class_id"    />
+    </resultMap>
+
+    <sql id="selectVrHisInspectionfeeVo">
+        select ins_id, mid, hid, inspection_name, class, unit_price, cost, create_time, update_time, unit, class_id from vr_his_inspectionfee
+    </sql>
+
+    <select id="selectVrHisInspectionfeeList" parameterType="VrHisInspectionfee" resultMap="VrHisInspectionfeeResult">
+        <include refid="selectVrHisInspectionfeeVo"/>
+        <where>  
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="hid != null "> and hid = #{hid}</if>
+            <if test="inspectionName != null  and inspectionName != ''"> and inspection_name like concat('%', #{inspectionName}, '%')</if>
+            <if test="class != null  and class != ''"> and class = #{class}</if>
+            <if test="unitPrice != null "> and unit_price = #{unitPrice}</if>
+            <if test="cost != null "> and cost = #{cost}</if>
+            <if test="unit != null  and unit != ''"> and unit = #{unit}</if>
+            <if test="classId != null "> and class_id = #{classId}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisInspectionfeeByInsId" parameterType="Long" resultMap="VrHisInspectionfeeResult">
+        <include refid="selectVrHisInspectionfeeVo"/>
+        where ins_id = #{insId}
+    </select>
+        
+    <insert id="insertVrHisInspectionfee" parameterType="VrHisInspectionfee" useGeneratedKeys="true" keyProperty="insId">
+        insert into vr_his_inspectionfee
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="mid != null">mid,</if>
+            <if test="hid != null">hid,</if>
+            <if test="inspectionName != null and inspectionName != ''">inspection_name,</if>
+            <if test="class != null and class != ''">class,</if>
+            <if test="unitPrice != null">unit_price,</if>
+            <if test="cost != null">cost,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="unit != null and unit != ''">unit,</if>
+            <if test="classId != null">class_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="mid != null">#{mid},</if>
+            <if test="hid != null">#{hid},</if>
+            <if test="inspectionName != null and inspectionName != ''">#{inspectionName},</if>
+            <if test="class != null and class != ''">#{class},</if>
+            <if test="unitPrice != null">#{unitPrice},</if>
+            <if test="cost != null">#{cost},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="unit != null and unit != ''">#{unit},</if>
+            <if test="classId != null">#{classId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisInspectionfee" parameterType="VrHisInspectionfee">
+        update vr_his_inspectionfee
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="hid != null">hid = #{hid},</if>
+            <if test="inspectionName != null and inspectionName != ''">inspection_name = #{inspectionName},</if>
+            <if test="class != null and class != ''">class = #{class},</if>
+            <if test="unitPrice != null">unit_price = #{unitPrice},</if>
+            <if test="cost != null">cost = #{cost},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="unit != null and unit != ''">unit = #{unit},</if>
+            <if test="classId != null">class_id = #{classId},</if>
+        </trim>
+        where ins_id = #{insId}
+    </update>
+
+    <delete id="deleteVrHisInspectionfeeByInsId" parameterType="Long">
+        delete from vr_his_inspectionfee where ins_id = #{insId}
+    </delete>
+
+    <delete id="deleteVrHisInspectionfeeByInsIds" parameterType="String">
+        delete from vr_his_inspectionfee where ins_id in 
+        <foreach item="insId" collection="array" open="(" separator="," close=")">
+            #{insId}
+        </foreach>
+    </delete>
+</mapper>

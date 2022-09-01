@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.xsystem.mapper.VrHisPrescriptionExtrachargesMapper">
+    
+    <resultMap type="VrHisPrescriptionExtracharges" id="VrHisPrescriptionExtrachargesResult">
+        <result property="preId"    column="pre_id"    />
+        <result property="mid"    column="mid"    />
+        <result property="hid"    column="hid"    />
+        <result property="extrachargesName"    column="extracharges_name"    />
+        <result property="fee"    column="fee"    />
+        <result property="type"    column="type"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectVrHisPrescriptionExtrachargesVo">
+        select pre_id, mid, hid, extracharges_name, fee, type, create_time, update_time from vr_his_prescription_extracharges
+    </sql>
+
+    <select id="selectVrHisPrescriptionExtrachargesList" parameterType="VrHisPrescriptionExtracharges" resultMap="VrHisPrescriptionExtrachargesResult">
+        <include refid="selectVrHisPrescriptionExtrachargesVo"/>
+        <where>  
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="hid != null "> and hid = #{hid}</if>
+            <if test="extrachargesName != null  and extrachargesName != ''"> and extracharges_name like concat('%', #{extrachargesName}, '%')</if>
+            <if test="fee != null "> and fee = #{fee}</if>
+            <if test="type != null "> and type = #{type}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisPrescriptionExtrachargesByPreId" parameterType="Long" resultMap="VrHisPrescriptionExtrachargesResult">
+        <include refid="selectVrHisPrescriptionExtrachargesVo"/>
+        where pre_id = #{preId}
+    </select>
+        
+    <insert id="insertVrHisPrescriptionExtracharges" parameterType="VrHisPrescriptionExtracharges" useGeneratedKeys="true" keyProperty="preId">
+        insert into vr_his_prescription_extracharges
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="mid != null">mid,</if>
+            <if test="hid != null">hid,</if>
+            <if test="extrachargesName != null and extrachargesName != ''">extracharges_name,</if>
+            <if test="fee != null">fee,</if>
+            <if test="type != null">type,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="mid != null">#{mid},</if>
+            <if test="hid != null">#{hid},</if>
+            <if test="extrachargesName != null and extrachargesName != ''">#{extrachargesName},</if>
+            <if test="fee != null">#{fee},</if>
+            <if test="type != null">#{type},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisPrescriptionExtracharges" parameterType="VrHisPrescriptionExtracharges">
+        update vr_his_prescription_extracharges
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="hid != null">hid = #{hid},</if>
+            <if test="extrachargesName != null and extrachargesName != ''">extracharges_name = #{extrachargesName},</if>
+            <if test="fee != null">fee = #{fee},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where pre_id = #{preId}
+    </update>
+
+    <delete id="deleteVrHisPrescriptionExtrachargesByPreId" parameterType="Long">
+        delete from vr_his_prescription_extracharges where pre_id = #{preId}
+    </delete>
+
+    <delete id="deleteVrHisPrescriptionExtrachargesByPreIds" parameterType="String">
+        delete from vr_his_prescription_extracharges where pre_id in 
+        <foreach item="preId" collection="array" open="(" separator="," close=")">
+            #{preId}
+        </foreach>
+    </delete>
+</mapper>

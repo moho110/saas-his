@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.xsystem.mapper.VrHisSchedulingMapper">
+    
+    <resultMap type="VrHisScheduling" id="VrHisSchedulingResult">
+        <result property="schedulingId"    column="scheduling_id"    />
+        <result property="physicianid"    column="physicianid"    />
+        <result property="departmentId"    column="department_id"    />
+        <result property="companyId"    column="company_id"    />
+        <result property="startTimeThisWeek"    column="start_time_this_week"    />
+        <result property="endTimeThisWeek"    column="end_time_this_week"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectVrHisSchedulingVo">
+        select scheduling_id, physicianid, department_id, company_id, start_time_this_week, end_time_this_week, create_time, update_time from vr_his_scheduling
+    </sql>
+
+    <select id="selectVrHisSchedulingList" parameterType="VrHisScheduling" resultMap="VrHisSchedulingResult">
+        <include refid="selectVrHisSchedulingVo"/>
+        <where>  
+            <if test="physicianid != null "> and physicianid = #{physicianid}</if>
+            <if test="departmentId != null "> and department_id = #{departmentId}</if>
+            <if test="companyId != null "> and company_id = #{companyId}</if>
+            <if test="startTimeThisWeek != null  and startTimeThisWeek != ''"> and start_time_this_week = #{startTimeThisWeek}</if>
+            <if test="endTimeThisWeek != null  and endTimeThisWeek != ''"> and end_time_this_week = #{endTimeThisWeek}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisSchedulingBySchedulingId" parameterType="Long" resultMap="VrHisSchedulingResult">
+        <include refid="selectVrHisSchedulingVo"/>
+        where scheduling_id = #{schedulingId}
+    </select>
+        
+    <insert id="insertVrHisScheduling" parameterType="VrHisScheduling" useGeneratedKeys="true" keyProperty="schedulingId">
+        insert into vr_his_scheduling
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="physicianid != null">physicianid,</if>
+            <if test="departmentId != null">department_id,</if>
+            <if test="companyId != null">company_id,</if>
+            <if test="startTimeThisWeek != null and startTimeThisWeek != ''">start_time_this_week,</if>
+            <if test="endTimeThisWeek != null and endTimeThisWeek != ''">end_time_this_week,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="physicianid != null">#{physicianid},</if>
+            <if test="departmentId != null">#{departmentId},</if>
+            <if test="companyId != null">#{companyId},</if>
+            <if test="startTimeThisWeek != null and startTimeThisWeek != ''">#{startTimeThisWeek},</if>
+            <if test="endTimeThisWeek != null and endTimeThisWeek != ''">#{endTimeThisWeek},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisScheduling" parameterType="VrHisScheduling">
+        update vr_his_scheduling
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="physicianid != null">physicianid = #{physicianid},</if>
+            <if test="departmentId != null">department_id = #{departmentId},</if>
+            <if test="companyId != null">company_id = #{companyId},</if>
+            <if test="startTimeThisWeek != null and startTimeThisWeek != ''">start_time_this_week = #{startTimeThisWeek},</if>
+            <if test="endTimeThisWeek != null and endTimeThisWeek != ''">end_time_this_week = #{endTimeThisWeek},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where scheduling_id = #{schedulingId}
+    </update>
+
+    <delete id="deleteVrHisSchedulingBySchedulingId" parameterType="Long">
+        delete from vr_his_scheduling where scheduling_id = #{schedulingId}
+    </delete>
+
+    <delete id="deleteVrHisSchedulingBySchedulingIds" parameterType="String">
+        delete from vr_his_scheduling where scheduling_id in 
+        <foreach item="schedulingId" collection="array" open="(" separator="," close=")">
+            #{schedulingId}
+        </foreach>
+    </delete>
+</mapper>

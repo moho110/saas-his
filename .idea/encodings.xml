@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/vrmlstudio-admin/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrmlstudio-admin/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrmlstudio-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrmlstudio-crm/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrmlstudio-crm/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrmlstudio-framework/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrmlstudio-saas-his-modules/vrmlstudio-basic-modules/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrmlstudio-saas-his-modules/vrmlstudio-basic-modules/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrmlstudio-saas-his-modules/vrmlstudio-department-modules/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrmlstudio-saas-his-modules/vrmlstudio-department-modules/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrmlstudio-saas-his-modules/vrmlstudio-medicine-modules/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrmlstudio-saas-his-modules/vrmlstudio-medicine-modules/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrmlstudio-saas-his-modules/vrmlstudio-person-modules/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrmlstudio-saas-his-modules/vrmlstudio-person-modules/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrmlstudio-saas-his-modules/vrmlstudio-sales-modules/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrmlstudio-saas-his-modules/vrmlstudio-sales-modules/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrmlstudio-saas-his-modules/vrmlstudio-xsystem-modules/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrmlstudio-saas-his-modules/vrmlstudio-xsystem-modules/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrmlstudio-system/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrmlstudio-system/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrmlstudio-tenant/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrmlstudio-tenant/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

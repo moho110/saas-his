@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.sales.mapper.VrHisRegisteredfeeSubMapper">
+    
+    <resultMap type="VrHisRegisteredfeeSub" id="VrHisRegisteredfeeSubResult">
+        <result property="regSubId"    column="reg_sub_id"    />
+        <result property="regId"    column="reg_id"    />
+        <result property="subRegisteredfeeName"    column="sub_registeredfee_name"    />
+        <result property="subRegisteredfeeFee"    column="sub_registeredfee_fee"    />
+    </resultMap>
+
+    <sql id="selectVrHisRegisteredfeeSubVo">
+        select reg_sub_id, reg_id, sub_registeredfee_name, sub_registeredfee_fee from vr_his_registeredfee_sub
+    </sql>
+
+    <select id="selectVrHisRegisteredfeeSubList" parameterType="VrHisRegisteredfeeSub" resultMap="VrHisRegisteredfeeSubResult">
+        <include refid="selectVrHisRegisteredfeeSubVo"/>
+        <where>  
+            <if test="regId != null "> and reg_id = #{regId}</if>
+            <if test="subRegisteredfeeName != null  and subRegisteredfeeName != ''"> and sub_registeredfee_name like concat('%', #{subRegisteredfeeName}, '%')</if>
+            <if test="subRegisteredfeeFee != null "> and sub_registeredfee_fee = #{subRegisteredfeeFee}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisRegisteredfeeSubByRegSubId" parameterType="Integer" resultMap="VrHisRegisteredfeeSubResult">
+        <include refid="selectVrHisRegisteredfeeSubVo"/>
+        where reg_sub_id = #{regSubId}
+    </select>
+        
+    <insert id="insertVrHisRegisteredfeeSub" parameterType="VrHisRegisteredfeeSub" useGeneratedKeys="true" keyProperty="regSubId">
+        insert into vr_his_registeredfee_sub
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="regId != null">reg_id,</if>
+            <if test="subRegisteredfeeName != null and subRegisteredfeeName != ''">sub_registeredfee_name,</if>
+            <if test="subRegisteredfeeFee != null">sub_registeredfee_fee,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="regId != null">#{regId},</if>
+            <if test="subRegisteredfeeName != null and subRegisteredfeeName != ''">#{subRegisteredfeeName},</if>
+            <if test="subRegisteredfeeFee != null">#{subRegisteredfeeFee},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisRegisteredfeeSub" parameterType="VrHisRegisteredfeeSub">
+        update vr_his_registeredfee_sub
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="regId != null">reg_id = #{regId},</if>
+            <if test="subRegisteredfeeName != null and subRegisteredfeeName != ''">sub_registeredfee_name = #{subRegisteredfeeName},</if>
+            <if test="subRegisteredfeeFee != null">sub_registeredfee_fee = #{subRegisteredfeeFee},</if>
+        </trim>
+        where reg_sub_id = #{regSubId}
+    </update>
+
+    <delete id="deleteVrHisRegisteredfeeSubByRegSubId" parameterType="Integer">
+        delete from vr_his_registeredfee_sub where reg_sub_id = #{regSubId}
+    </delete>
+
+    <delete id="deleteVrHisRegisteredfeeSubByRegSubIds" parameterType="String">
+        delete from vr_his_registeredfee_sub where reg_sub_id in 
+        <foreach item="regSubId" collection="array" open="(" separator="," close=")">
+            #{regSubId}
+        </foreach>
+    </delete>
+</mapper>

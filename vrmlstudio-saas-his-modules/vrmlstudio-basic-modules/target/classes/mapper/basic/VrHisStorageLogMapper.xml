@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.department.mapper.VrHisStorageLogMapper">
+    
+    <resultMap type="VrHisStorageLog" id="VrHisStorageLogResult">
+        <result property="logId"    column="log_id"    />
+        <result property="companyId"    column="company_id"    />
+        <result property="purchaseId"    column="purchase_id"    />
+        <result property="batchesOfInventoryNumber"    column="batches_of_inventory_number"    />
+        <result property="medicinesId"    column="medicines_id"    />
+        <result property="modifierId"    column="modifier_id"    />
+        <result property="newQuantity"    column="new_quantity"    />
+        <result property="newTradePrice"    column="new_trade_price"    />
+        <result property="newPrescriptionPrice"    column="new_prescription_price"    />
+        <result property="oldQuantity"    column="old_quantity"    />
+        <result property="oldTradePrice"    column="old_trade_price"    />
+        <result property="oldPrescriptionPrice"    column="old_prescription_price"    />
+        <result property="operationModule"    column="operation_module"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectVrHisStorageLogVo">
+        select log_id, company_id, purchase_id, batches_of_inventory_number, medicines_id, modifier_id, new_quantity, new_trade_price, new_prescription_price, old_quantity, old_trade_price, old_prescription_price, operation_module, create_time from vr_his_storage_log
+    </sql>
+
+    <select id="selectVrHisStorageLogList" parameterType="VrHisStorageLog" resultMap="VrHisStorageLogResult">
+        <include refid="selectVrHisStorageLogVo"/>
+        <where>  
+            <if test="companyId != null "> and company_id = #{companyId}</if>
+            <if test="purchaseId != null "> and purchase_id = #{purchaseId}</if>
+            <if test="batchesOfInventoryNumber != null "> and batches_of_inventory_number = #{batchesOfInventoryNumber}</if>
+            <if test="medicinesId != null "> and medicines_id = #{medicinesId}</if>
+            <if test="modifierId != null "> and modifier_id = #{modifierId}</if>
+            <if test="newQuantity != null "> and new_quantity = #{newQuantity}</if>
+            <if test="newTradePrice != null "> and new_trade_price = #{newTradePrice}</if>
+            <if test="newPrescriptionPrice != null "> and new_prescription_price = #{newPrescriptionPrice}</if>
+            <if test="oldQuantity != null "> and old_quantity = #{oldQuantity}</if>
+            <if test="oldTradePrice != null "> and old_trade_price = #{oldTradePrice}</if>
+            <if test="oldPrescriptionPrice != null "> and old_prescription_price = #{oldPrescriptionPrice}</if>
+            <if test="operationModule != null "> and operation_module = #{operationModule}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisStorageLogByLogId" parameterType="Integer" resultMap="VrHisStorageLogResult">
+        <include refid="selectVrHisStorageLogVo"/>
+        where log_id = #{logId}
+    </select>
+        
+    <insert id="insertVrHisStorageLog" parameterType="VrHisStorageLog" useGeneratedKeys="true" keyProperty="logId">
+        insert into vr_his_storage_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="companyId != null">company_id,</if>
+            <if test="purchaseId != null">purchase_id,</if>
+            <if test="batchesOfInventoryNumber != null">batches_of_inventory_number,</if>
+            <if test="medicinesId != null">medicines_id,</if>
+            <if test="modifierId != null">modifier_id,</if>
+            <if test="newQuantity != null">new_quantity,</if>
+            <if test="newTradePrice != null">new_trade_price,</if>
+            <if test="newPrescriptionPrice != null">new_prescription_price,</if>
+            <if test="oldQuantity != null">old_quantity,</if>
+            <if test="oldTradePrice != null">old_trade_price,</if>
+            <if test="oldPrescriptionPrice != null">old_prescription_price,</if>
+            <if test="operationModule != null">operation_module,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="companyId != null">#{companyId},</if>
+            <if test="purchaseId != null">#{purchaseId},</if>
+            <if test="batchesOfInventoryNumber != null">#{batchesOfInventoryNumber},</if>
+            <if test="medicinesId != null">#{medicinesId},</if>
+            <if test="modifierId != null">#{modifierId},</if>
+            <if test="newQuantity != null">#{newQuantity},</if>
+            <if test="newTradePrice != null">#{newTradePrice},</if>
+            <if test="newPrescriptionPrice != null">#{newPrescriptionPrice},</if>
+            <if test="oldQuantity != null">#{oldQuantity},</if>
+            <if test="oldTradePrice != null">#{oldTradePrice},</if>
+            <if test="oldPrescriptionPrice != null">#{oldPrescriptionPrice},</if>
+            <if test="operationModule != null">#{operationModule},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisStorageLog" parameterType="VrHisStorageLog">
+        update vr_his_storage_log
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="companyId != null">company_id = #{companyId},</if>
+            <if test="purchaseId != null">purchase_id = #{purchaseId},</if>
+            <if test="batchesOfInventoryNumber != null">batches_of_inventory_number = #{batchesOfInventoryNumber},</if>
+            <if test="medicinesId != null">medicines_id = #{medicinesId},</if>
+            <if test="modifierId != null">modifier_id = #{modifierId},</if>
+            <if test="newQuantity != null">new_quantity = #{newQuantity},</if>
+            <if test="newTradePrice != null">new_trade_price = #{newTradePrice},</if>
+            <if test="newPrescriptionPrice != null">new_prescription_price = #{newPrescriptionPrice},</if>
+            <if test="oldQuantity != null">old_quantity = #{oldQuantity},</if>
+            <if test="oldTradePrice != null">old_trade_price = #{oldTradePrice},</if>
+            <if test="oldPrescriptionPrice != null">old_prescription_price = #{oldPrescriptionPrice},</if>
+            <if test="operationModule != null">operation_module = #{operationModule},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where log_id = #{logId}
+    </update>
+
+    <delete id="deleteVrHisStorageLogByLogId" parameterType="Integer">
+        delete from vr_his_storage_log where log_id = #{logId}
+    </delete>
+
+    <delete id="deleteVrHisStorageLogByLogIds" parameterType="String">
+        delete from vr_his_storage_log where log_id in 
+        <foreach item="logId" collection="array" open="(" separator="," close=")">
+            #{logId}
+        </foreach>
+    </delete>
+</mapper>

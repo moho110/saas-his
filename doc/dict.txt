@@ -1,0 +1,170 @@
+字典编码   字典标签  字典键值    字典排序   状态   备注     创建时间
+  1          良好       0            1       正常   状态良好      
+  2          一般       1            2       正常   状态良好      
+  3           未知      2            3       正常   状态未知
+{ min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+{ type: 'date', required: true, message: '请选择日期', trigger: 'change' }
+{ type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
+{ type: 'number', message: '年龄必须为数字值'}
+  <el-radio v-model="radio" label="1">备选项</el-radio>
+  <el-radio v-model="radio" label="2">备选项</el-radio>
+  <el-input-number v-model="num" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
+<el-input placeholder="请输入密码" v-model="input" show-password></el-input>
+<el-input placeholder="请输入内容" v-model="input1">
+    <template slot="prepend">Http://</template>
+  </el-input>
+<el-input placeholder="请输入内容" v-model="input2">
+    <template slot="append">.com</template>
+  </el-input>
+ALTER TABLE `cmdict_countrycode` CHANGE `countryID` `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT; 
+<el-input
+  type="text"
+  placeholder="请输入内容"
+  v-model="text"
+  maxlength="10"
+  show-word-limit
+>
+
+<el-input
+  type="textarea"
+  placeholder="请输入内容"
+  v-model="textarea"
+  maxlength="30"
+  show-word-limit
+>
+</el-input>
+
+
+<el-table-column
+	align="center"
+	prop="status"
+	label="状态"
+	:formatter="stateFormat"
+/>
+pages\sys\login\index
+
+stateFormat(row, column) {
+      if (row.status === 2) {
+        return "待入库";
+      } else if (row.status === 4) {
+        return "已入库";
+      } else if (row.status === 5) {
+        return "待审批";
+      } else if (row.status === 6) {
+        return "待出库";
+      } else if (row.status === 8) {
+        return "已出库";
+      }
+},
+
+/** 用户下拉框 */
+  userFocus() {
+      let that = this
+      this.axios.get("http://localhost:9000/person/admin/getList")
+        .then((response)=>{
+         this.form.userData = response.data;
+      }).catch((response)=> {
+        console.log(response);
+      })
+  },
+
+
+<el-select v-model="form.uid" placeholder="请输入用户ID" @focus="userFocus" 
+          @change="userChange(form.userData.name)" value-key="uid">
+            <el-option
+              v-for="form in form.userData"
+                :key="form.id"
+                :label="form.name"
+                :value="form.id">
+            </el-option>
+          </el-select>
+
+<h1 data-v-6494804b="" class="sidebar-title" style="color: rgb(255, 255, 255);">若依管理系统 </h1>
+
+<el-input v-model="form.sealimg" placeholder="请输入对应印章图片" />
+
+<el-table-column label="状态" align="center" prop="status" :formatter="stateFormat" />
+      <el-table-column label="是否提交" align="center" prop="isturn" :formatter="submitFormat"/>
+
+
+
+/** 状态 */
+    stateFormat(row,column) {
+      if(row.status === 1) {
+        return "良好";
+      } else {
+        return "一般";
+      }
+    },
+    /** 是否提交 */
+    submitFormat(row,column) {
+      if(row.isturn == 1) {
+        return "已提交";
+      } else {
+        return "未提交";
+      }
+    },
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////
+<insert id="insertArticles" parameterType="Articles" useGeneratedKeys="true" keyProperty="id">
+        insert into articles
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null">title,</if>
+            <if test="content != null">content,</if>
+            <if test="createtime != null">createtime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null">#{title},</if>
+            <if test="content != null">#{content},</if>
+            <if test="createtime != null">#{createtime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateArticles" parameterType="Articles">
+        update articles
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null">title = #{title},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="createtime != null">createtime = #{createtime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+////////////////////////////////////////////////////////////////////////////////////////
+<el-form-item label="用户ID" prop="uid">
+          <el-select v-model="form.uid" placeholder="请输入用户ID">
+            <el-option
+              v-for="item in userList"
+                :key="item.id"
+                :label="item.name"
+                :value="item.id">
+            </el-option>
+          </el-select>
+        </el-form-item>
+
+	<el-select v-model="form.uid" placeholder="请输入用户ID">
+            <el-option
+              v-for="item in bookList"
+                :key="item.id"
+                :label="item.author"
+                :value="item.id">
+            </el-option>
+          </el-select>
+
+author
+
+import { getUserList, getBookList } from "@/api/xinhu-person/admin";
+userList: [],
+bookList: [],
+
+/person/book/list
+
+
+//获取用户列表
+    getUserList().then(response=> {
+      this.userList = response.data;
+    })
+

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.person.mapper.VrHisDemoDoctorMapper">
+    
+    <resultMap type="VrHisDemoDoctor" id="VrHisDemoDoctorResult">
+        <result property="id"    column="id"    />
+        <result property="truename"    column="truename"    />
+        <result property="dtitle"    column="dtitle"    />
+        <result property="sex"    column="sex"    />
+        <result property="address"    column="address"    />
+        <result property="hospitalName"    column="hospital_name"    />
+        <result property="pricea"    column="pricea"    />
+        <result property="priceb"    column="priceb"    />
+        <result property="hasfix"    column="hasfix"    />
+        <result property="about"    column="about"    />
+        <result property="case"    column="case"    />
+    </resultMap>
+
+    <sql id="selectVrHisDemoDoctorVo">
+        select id, truename, dtitle, sex, address, hospital_name, pricea, priceb, hasfix, about, case from vr_his_demo_doctor
+    </sql>
+
+    <select id="selectVrHisDemoDoctorList" parameterType="VrHisDemoDoctor" resultMap="VrHisDemoDoctorResult">
+        <include refid="selectVrHisDemoDoctorVo"/>
+        <where>  
+            <if test="truename != null  and truename != ''"> and truename like concat('%', #{truename}, '%')</if>
+            <if test="dtitle != null  and dtitle != ''"> and dtitle = #{dtitle}</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="hospitalName != null  and hospitalName != ''"> and hospital_name like concat('%', #{hospitalName}, '%')</if>
+            <if test="pricea != null  and pricea != ''"> and pricea = #{pricea}</if>
+            <if test="priceb != null  and priceb != ''"> and priceb = #{priceb}</if>
+            <if test="hasfix != null  and hasfix != ''"> and hasfix = #{hasfix}</if>
+            <if test="about != null  and about != ''"> and about = #{about}</if>
+            <if test="case != null  and case != ''"> and case = #{case}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisDemoDoctorById" parameterType="Long" resultMap="VrHisDemoDoctorResult">
+        <include refid="selectVrHisDemoDoctorVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertVrHisDemoDoctor" parameterType="VrHisDemoDoctor" useGeneratedKeys="true" keyProperty="id">
+        insert into vr_his_demo_doctor
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="truename != null">truename,</if>
+            <if test="dtitle != null">dtitle,</if>
+            <if test="sex != null">sex,</if>
+            <if test="address != null">address,</if>
+            <if test="hospitalName != null">hospital_name,</if>
+            <if test="pricea != null">pricea,</if>
+            <if test="priceb != null">priceb,</if>
+            <if test="hasfix != null">hasfix,</if>
+            <if test="about != null">about,</if>
+            <if test="case != null">case,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="truename != null">#{truename},</if>
+            <if test="dtitle != null">#{dtitle},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="address != null">#{address},</if>
+            <if test="hospitalName != null">#{hospitalName},</if>
+            <if test="pricea != null">#{pricea},</if>
+            <if test="priceb != null">#{priceb},</if>
+            <if test="hasfix != null">#{hasfix},</if>
+            <if test="about != null">#{about},</if>
+            <if test="case != null">#{case},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisDemoDoctor" parameterType="VrHisDemoDoctor">
+        update vr_his_demo_doctor
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="truename != null">truename = #{truename},</if>
+            <if test="dtitle != null">dtitle = #{dtitle},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="hospitalName != null">hospital_name = #{hospitalName},</if>
+            <if test="pricea != null">pricea = #{pricea},</if>
+            <if test="priceb != null">priceb = #{priceb},</if>
+            <if test="hasfix != null">hasfix = #{hasfix},</if>
+            <if test="about != null">about = #{about},</if>
+            <if test="case != null">case = #{case},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteVrHisDemoDoctorById" parameterType="Long">
+        delete from vr_his_demo_doctor where id = #{id}
+    </delete>
+
+    <delete id="deleteVrHisDemoDoctorByIds" parameterType="String">
+        delete from vr_his_demo_doctor where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

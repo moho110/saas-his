@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.department.mapper.VrHisDictionaryMapper">
+    
+    <resultMap type="VrHisDictionary" id="VrHisDictionaryResult">
+        <result property="did"    column="did"    />
+        <result property="dictionaryName"    column="dictionary_name"    />
+        <result property="parentId"    column="parent_id"    />
+        <result property="hid"    column="hid"    />
+        <result property="type"    column="type"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="number"    column="number"    />
+        <result property="isDel"    column="is_del"    />
+    </resultMap>
+
+    <sql id="selectVrHisDictionaryVo">
+        select did, dictionary_name, parent_id, hid, type, create_time, update_time, number, is_del from vr_his_dictionary
+    </sql>
+
+    <select id="selectVrHisDictionaryList" parameterType="VrHisDictionary" resultMap="VrHisDictionaryResult">
+        <include refid="selectVrHisDictionaryVo"/>
+        <where>  
+            <if test="dictionaryName != null  and dictionaryName != ''"> and dictionary_name like concat('%', #{dictionaryName}, '%')</if>
+            <if test="parentId != null "> and parent_id = #{parentId}</if>
+            <if test="hid != null "> and hid = #{hid}</if>
+            <if test="type != null "> and type = #{type}</if>
+            <if test="number != null  and number != ''"> and number = #{number}</if>
+            <if test="isDel != null "> and is_del = #{isDel}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisDictionaryByDid" parameterType="Long" resultMap="VrHisDictionaryResult">
+        <include refid="selectVrHisDictionaryVo"/>
+        where did = #{did}
+    </select>
+        
+    <insert id="insertVrHisDictionary" parameterType="VrHisDictionary" useGeneratedKeys="true" keyProperty="did">
+        insert into vr_his_dictionary
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dictionaryName != null and dictionaryName != ''">dictionary_name,</if>
+            <if test="parentId != null">parent_id,</if>
+            <if test="hid != null">hid,</if>
+            <if test="type != null">type,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="number != null and number != ''">number,</if>
+            <if test="isDel != null">is_del,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dictionaryName != null and dictionaryName != ''">#{dictionaryName},</if>
+            <if test="parentId != null">#{parentId},</if>
+            <if test="hid != null">#{hid},</if>
+            <if test="type != null">#{type},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="number != null and number != ''">#{number},</if>
+            <if test="isDel != null">#{isDel},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisDictionary" parameterType="VrHisDictionary">
+        update vr_his_dictionary
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="dictionaryName != null and dictionaryName != ''">dictionary_name = #{dictionaryName},</if>
+            <if test="parentId != null">parent_id = #{parentId},</if>
+            <if test="hid != null">hid = #{hid},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="number != null and number != ''">number = #{number},</if>
+            <if test="isDel != null">is_del = #{isDel},</if>
+        </trim>
+        where did = #{did}
+    </update>
+
+    <delete id="deleteVrHisDictionaryByDid" parameterType="Long">
+        delete from vr_his_dictionary where did = #{did}
+    </delete>
+
+    <delete id="deleteVrHisDictionaryByDids" parameterType="String">
+        delete from vr_his_dictionary where did in 
+        <foreach item="did" collection="array" open="(" separator="," close=")">
+            #{did}
+        </foreach>
+    </delete>
+</mapper>

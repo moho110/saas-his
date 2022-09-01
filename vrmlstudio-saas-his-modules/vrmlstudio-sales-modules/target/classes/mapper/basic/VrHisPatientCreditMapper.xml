@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.sales.mapper.VrHisPatientCreditMapper">
+    
+    <resultMap type="VrHisPatientCredit" id="VrHisPatientCreditResult">
+        <result property="id"    column="id"    />
+        <result property="hospitalId"    column="hospital_id"    />
+        <result property="patientId"    column="patient_id"    />
+        <result property="doctorId"    column="doctor_id"    />
+        <result property="qaId"    column="qa_id"    />
+        <result property="status"    column="status"    />
+        <result property="qaId2"    column="qa_id2"    />
+        <result property="addtime"    column="addtime"    />
+        <result property="uptime"    column="uptime"    />
+    </resultMap>
+
+    <sql id="selectVrHisPatientCreditVo">
+        select id, hospital_id, patient_id, doctor_id, qa_id, status, qa_id2, addtime, uptime from vr_his_patient_credit
+    </sql>
+
+    <select id="selectVrHisPatientCreditList" parameterType="VrHisPatientCredit" resultMap="VrHisPatientCreditResult">
+        <include refid="selectVrHisPatientCreditVo"/>
+        <where>  
+            <if test="hospitalId != null "> and hospital_id = #{hospitalId}</if>
+            <if test="patientId != null "> and patient_id = #{patientId}</if>
+            <if test="doctorId != null "> and doctor_id = #{doctorId}</if>
+            <if test="qaId != null "> and qa_id = #{qaId}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="qaId2 != null "> and qa_id2 = #{qaId2}</if>
+            <if test="addtime != null "> and addtime = #{addtime}</if>
+            <if test="uptime != null "> and uptime = #{uptime}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisPatientCreditById" parameterType="Integer" resultMap="VrHisPatientCreditResult">
+        <include refid="selectVrHisPatientCreditVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertVrHisPatientCredit" parameterType="VrHisPatientCredit" useGeneratedKeys="true" keyProperty="id">
+        insert into vr_his_patient_credit
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="hospitalId != null">hospital_id,</if>
+            <if test="patientId != null">patient_id,</if>
+            <if test="doctorId != null">doctor_id,</if>
+            <if test="qaId != null">qa_id,</if>
+            <if test="status != null">status,</if>
+            <if test="qaId2 != null">qa_id2,</if>
+            <if test="addtime != null">addtime,</if>
+            <if test="uptime != null">uptime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="hospitalId != null">#{hospitalId},</if>
+            <if test="patientId != null">#{patientId},</if>
+            <if test="doctorId != null">#{doctorId},</if>
+            <if test="qaId != null">#{qaId},</if>
+            <if test="status != null">#{status},</if>
+            <if test="qaId2 != null">#{qaId2},</if>
+            <if test="addtime != null">#{addtime},</if>
+            <if test="uptime != null">#{uptime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisPatientCredit" parameterType="VrHisPatientCredit">
+        update vr_his_patient_credit
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="hospitalId != null">hospital_id = #{hospitalId},</if>
+            <if test="patientId != null">patient_id = #{patientId},</if>
+            <if test="doctorId != null">doctor_id = #{doctorId},</if>
+            <if test="qaId != null">qa_id = #{qaId},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="qaId2 != null">qa_id2 = #{qaId2},</if>
+            <if test="addtime != null">addtime = #{addtime},</if>
+            <if test="uptime != null">uptime = #{uptime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteVrHisPatientCreditById" parameterType="Integer">
+        delete from vr_his_patient_credit where id = #{id}
+    </delete>
+
+    <delete id="deleteVrHisPatientCreditByIds" parameterType="String">
+        delete from vr_his_patient_credit where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

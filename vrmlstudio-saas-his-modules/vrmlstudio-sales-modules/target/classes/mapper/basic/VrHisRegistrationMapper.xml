@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.sales.mapper.VrHisRegistrationMapper">
+    
+    <resultMap type="VrHisRegistration" id="VrHisRegistrationResult">
+        <result property="registrationId"    column="registration_id"    />
+        <result property="patientId"    column="patient_id"    />
+        <result property="physicianId"    column="physician_id"    />
+        <result property="operatorId"    column="operator_id"    />
+        <result property="companyId"    column="company_id"    />
+        <result property="departmentId"    column="department_id"    />
+        <result property="registeredfeeId"    column="registeredfee_id"    />
+        <result property="registrationAmount"    column="registration_amount"    />
+        <result property="registrationNumber"    column="registration_number"    />
+        <result property="registrationStatus"    column="registration_status"    />
+        <result property="schedulingId"    column="scheduling_id"    />
+        <result property="schedulingSubsectionId"    column="scheduling_subsection_id"    />
+        <result property="schedulingWeekId"    column="scheduling_week_id"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="pkgId"    column="pkg_id"    />
+    </resultMap>
+
+    <sql id="selectVrHisRegistrationVo">
+        select registration_id, patient_id, physician_id, operator_id, company_id, department_id, registeredfee_id, registration_amount, registration_number, registration_status, scheduling_id, scheduling_subsection_id, scheduling_week_id, create_time, update_time, pkg_id from vr_his_registration
+    </sql>
+
+    <select id="selectVrHisRegistrationList" parameterType="VrHisRegistration" resultMap="VrHisRegistrationResult">
+        <include refid="selectVrHisRegistrationVo"/>
+        <where>  
+            <if test="patientId != null "> and patient_id = #{patientId}</if>
+            <if test="physicianId != null "> and physician_id = #{physicianId}</if>
+            <if test="operatorId != null "> and operator_id = #{operatorId}</if>
+            <if test="companyId != null "> and company_id = #{companyId}</if>
+            <if test="departmentId != null "> and department_id = #{departmentId}</if>
+            <if test="registeredfeeId != null "> and registeredfee_id = #{registeredfeeId}</if>
+            <if test="registrationAmount != null "> and registration_amount = #{registrationAmount}</if>
+            <if test="registrationNumber != null "> and registration_number = #{registrationNumber}</if>
+            <if test="registrationStatus != null "> and registration_status = #{registrationStatus}</if>
+            <if test="schedulingId != null "> and scheduling_id = #{schedulingId}</if>
+            <if test="schedulingSubsectionId != null "> and scheduling_subsection_id = #{schedulingSubsectionId}</if>
+            <if test="schedulingWeekId != null "> and scheduling_week_id = #{schedulingWeekId}</if>
+            <if test="pkgId != null "> and pkg_id = #{pkgId}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisRegistrationByRegistrationId" parameterType="Long" resultMap="VrHisRegistrationResult">
+        <include refid="selectVrHisRegistrationVo"/>
+        where registration_id = #{registrationId}
+    </select>
+        
+    <insert id="insertVrHisRegistration" parameterType="VrHisRegistration" useGeneratedKeys="true" keyProperty="registrationId">
+        insert into vr_his_registration
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="patientId != null">patient_id,</if>
+            <if test="physicianId != null">physician_id,</if>
+            <if test="operatorId != null">operator_id,</if>
+            <if test="companyId != null">company_id,</if>
+            <if test="departmentId != null">department_id,</if>
+            <if test="registeredfeeId != null">registeredfee_id,</if>
+            <if test="registrationAmount != null">registration_amount,</if>
+            <if test="registrationNumber != null">registration_number,</if>
+            <if test="registrationStatus != null">registration_status,</if>
+            <if test="schedulingId != null">scheduling_id,</if>
+            <if test="schedulingSubsectionId != null">scheduling_subsection_id,</if>
+            <if test="schedulingWeekId != null">scheduling_week_id,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="pkgId != null">pkg_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="patientId != null">#{patientId},</if>
+            <if test="physicianId != null">#{physicianId},</if>
+            <if test="operatorId != null">#{operatorId},</if>
+            <if test="companyId != null">#{companyId},</if>
+            <if test="departmentId != null">#{departmentId},</if>
+            <if test="registeredfeeId != null">#{registeredfeeId},</if>
+            <if test="registrationAmount != null">#{registrationAmount},</if>
+            <if test="registrationNumber != null">#{registrationNumber},</if>
+            <if test="registrationStatus != null">#{registrationStatus},</if>
+            <if test="schedulingId != null">#{schedulingId},</if>
+            <if test="schedulingSubsectionId != null">#{schedulingSubsectionId},</if>
+            <if test="schedulingWeekId != null">#{schedulingWeekId},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="pkgId != null">#{pkgId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisRegistration" parameterType="VrHisRegistration">
+        update vr_his_registration
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="patientId != null">patient_id = #{patientId},</if>
+            <if test="physicianId != null">physician_id = #{physicianId},</if>
+            <if test="operatorId != null">operator_id = #{operatorId},</if>
+            <if test="companyId != null">company_id = #{companyId},</if>
+            <if test="departmentId != null">department_id = #{departmentId},</if>
+            <if test="registeredfeeId != null">registeredfee_id = #{registeredfeeId},</if>
+            <if test="registrationAmount != null">registration_amount = #{registrationAmount},</if>
+            <if test="registrationNumber != null">registration_number = #{registrationNumber},</if>
+            <if test="registrationStatus != null">registration_status = #{registrationStatus},</if>
+            <if test="schedulingId != null">scheduling_id = #{schedulingId},</if>
+            <if test="schedulingSubsectionId != null">scheduling_subsection_id = #{schedulingSubsectionId},</if>
+            <if test="schedulingWeekId != null">scheduling_week_id = #{schedulingWeekId},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="pkgId != null">pkg_id = #{pkgId},</if>
+        </trim>
+        where registration_id = #{registrationId}
+    </update>
+
+    <delete id="deleteVrHisRegistrationByRegistrationId" parameterType="Long">
+        delete from vr_his_registration where registration_id = #{registrationId}
+    </delete>
+
+    <delete id="deleteVrHisRegistrationByRegistrationIds" parameterType="String">
+        delete from vr_his_registration where registration_id in 
+        <foreach item="registrationId" collection="array" open="(" separator="," close=")">
+            #{registrationId}
+        </foreach>
+    </delete>
+</mapper>

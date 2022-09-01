@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.xsystem.mapper.VrHisWxMenuMapper">
+    
+    <resultMap type="VrHisWxMenu" id="VrHisWxMenuResult">
+        <result property="id"    column="id"    />
+        <result property="hospitalId"    column="hospital_id"    />
+        <result property="pid"    column="pid"    />
+        <result property="type"    column="type"    />
+        <result property="name"    column="name"    />
+        <result property="key"    column="key"    />
+        <result property="url"    column="url"    />
+        <result property="mediaId"    column="media_id"    />
+        <result property="appid"    column="appid"    />
+        <result property="pagepath"    column="pagepath"    />
+        <result property="listorder"    column="listorder"    />
+    </resultMap>
+
+    <sql id="selectVrHisWxMenuVo">
+        select id, hospital_id, pid, type, name, key, url, media_id, appid, pagepath, listorder from vr_his_wx_menu
+    </sql>
+
+    <select id="selectVrHisWxMenuList" parameterType="VrHisWxMenu" resultMap="VrHisWxMenuResult">
+        <include refid="selectVrHisWxMenuVo"/>
+        <where>  
+            <if test="hospitalId != null "> and hospital_id = #{hospitalId}</if>
+            <if test="pid != null "> and pid = #{pid}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="key != null  and key != ''"> and key = #{key}</if>
+            <if test="url != null  and url != ''"> and url = #{url}</if>
+            <if test="mediaId != null  and mediaId != ''"> and media_id = #{mediaId}</if>
+            <if test="appid != null  and appid != ''"> and appid = #{appid}</if>
+            <if test="pagepath != null  and pagepath != ''"> and pagepath = #{pagepath}</if>
+            <if test="listorder != null "> and listorder = #{listorder}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisWxMenuById" parameterType="Integer" resultMap="VrHisWxMenuResult">
+        <include refid="selectVrHisWxMenuVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertVrHisWxMenu" parameterType="VrHisWxMenu" useGeneratedKeys="true" keyProperty="id">
+        insert into vr_his_wx_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="hospitalId != null">hospital_id,</if>
+            <if test="pid != null">pid,</if>
+            <if test="type != null">type,</if>
+            <if test="name != null">name,</if>
+            <if test="key != null">key,</if>
+            <if test="url != null">url,</if>
+            <if test="mediaId != null">media_id,</if>
+            <if test="appid != null">appid,</if>
+            <if test="pagepath != null">pagepath,</if>
+            <if test="listorder != null">listorder,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="hospitalId != null">#{hospitalId},</if>
+            <if test="pid != null">#{pid},</if>
+            <if test="type != null">#{type},</if>
+            <if test="name != null">#{name},</if>
+            <if test="key != null">#{key},</if>
+            <if test="url != null">#{url},</if>
+            <if test="mediaId != null">#{mediaId},</if>
+            <if test="appid != null">#{appid},</if>
+            <if test="pagepath != null">#{pagepath},</if>
+            <if test="listorder != null">#{listorder},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisWxMenu" parameterType="VrHisWxMenu">
+        update vr_his_wx_menu
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="hospitalId != null">hospital_id = #{hospitalId},</if>
+            <if test="pid != null">pid = #{pid},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="key != null">key = #{key},</if>
+            <if test="url != null">url = #{url},</if>
+            <if test="mediaId != null">media_id = #{mediaId},</if>
+            <if test="appid != null">appid = #{appid},</if>
+            <if test="pagepath != null">pagepath = #{pagepath},</if>
+            <if test="listorder != null">listorder = #{listorder},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteVrHisWxMenuById" parameterType="Integer">
+        delete from vr_his_wx_menu where id = #{id}
+    </delete>
+
+    <delete id="deleteVrHisWxMenuByIds" parameterType="String">
+        delete from vr_his_wx_menu where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

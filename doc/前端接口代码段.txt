@@ -1,0 +1,54 @@
+package me.zhengjie.vrmlstudio.api.rest;
+
+import me.zhengjie.annotation.rest.AnonymousGetMapping;
+import org.springframework.http.HttpStatus;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import me.zhengjie.vrmlstudio.person.service.dto.XinhuHomeitemsDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Pageable;
+import me.zhengjie.vrmlstudio.person.domain.XinhuHomeitems;
+import me.zhengjie.vrmlstudio.person.service.XinhuHomeitemsService;
+import me.zhengjie.vrmlstudio.person.service.dto.XinhuHomeitemsQueryCriteria;
+
+@RestController
+@Api(tags = "桌面项目接口")
+public class HomeXinhuHomeItemsController {
+    @Autowired
+    private XinhuHomeitemsService xinhuHomeItemsService;
+
+    @AnonymousGetMapping("/person/homeitemsInfo")
+    @ApiOperation(value = "桌面项目表", notes = "获取桌面项目表")
+    public ResponseEntity<Object> homeitemsInfo(XinhuHomeitemsQueryCriteria criteria){
+        return new ResponseEntity<>(xinhuHomeItemsService.queryAll(criteria),HttpStatus.OK);
+    }
+}
+
+
+    @AnonymousGetMapping("/finance/deptFind/{id}")
+    @ApiOperation("按ID获取组织结构部门")
+    public ResponseEntity<Object> deptFind(@PathVariable("id") Integer id) {
+        return new ResponseEntity<>(xinhuDeptService.findById(id),HttpStatus.OK);
+    }
+
+
+@PreAuthorize("@ss.hasPermi('xinhu-person:city:query')")
+    @GetMapping(value = "/{id}")
+    public AjaxResult getInfo(@PathVariable("id") Long id)
+    {
+        return AjaxResult.success(xinhuCityService.selectXinhuCityById(id));
+    }
+
+
+
+
+@RequestMapping("/homeitems/list")
+    public AjaxResult list(XinhuHomeitems items) {
+        List<XinhuHomeitems> homeitems =  xinhuHomeitemsService.selectXinhuHomeitemsList(items);
+        return AjaxResult.success(homeitems);
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////////

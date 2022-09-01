@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.xsystem.mapper.VrHisPatientFileMapper">
+    
+    <resultMap type="VrHisPatientFile" id="VrHisPatientFileResult">
+        <result property="fileId"    column="file_id"    />
+        <result property="patientId"    column="patient_id"    />
+        <result property="emergencyContactName"    column="emergency_contact_name"    />
+        <result property="emergencyContactMobile"    column="emergency_contact_mobile"    />
+        <result property="emergencyContactRelation"    column="emergency_contact_relation"    />
+        <result property="leftEarHearing"    column="left_ear_hearing"    />
+        <result property="rightEarHearing"    column="right_ear_hearing"    />
+        <result property="leftVision"    column="left_vision"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="rightVision"    column="right_vision"    />
+        <result property="height"    column="height"    />
+        <result property="weight"    column="weight"    />
+        <result property="bloodType"    column="blood_type"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="personalInfo"    column="personal_info"    />
+        <result property="familyInfo"    column="family_info"    />
+    </resultMap>
+
+    <sql id="selectVrHisPatientFileVo">
+        select file_id, patient_id, emergency_contact_name, emergency_contact_mobile, emergency_contact_relation, left_ear_hearing, right_ear_hearing, left_vision, update_time, right_vision, height, weight, blood_type, create_time, personal_info, family_info from vr_his_patient_file
+    </sql>
+
+    <select id="selectVrHisPatientFileList" parameterType="VrHisPatientFile" resultMap="VrHisPatientFileResult">
+        <include refid="selectVrHisPatientFileVo"/>
+        <where>  
+            <if test="patientId != null "> and patient_id = #{patientId}</if>
+            <if test="emergencyContactName != null  and emergencyContactName != ''"> and emergency_contact_name like concat('%', #{emergencyContactName}, '%')</if>
+            <if test="emergencyContactMobile != null  and emergencyContactMobile != ''"> and emergency_contact_mobile = #{emergencyContactMobile}</if>
+            <if test="emergencyContactRelation != null "> and emergency_contact_relation = #{emergencyContactRelation}</if>
+            <if test="leftEarHearing != null "> and left_ear_hearing = #{leftEarHearing}</if>
+            <if test="rightEarHearing != null "> and right_ear_hearing = #{rightEarHearing}</if>
+            <if test="leftVision != null "> and left_vision = #{leftVision}</if>
+            <if test="rightVision != null "> and right_vision = #{rightVision}</if>
+            <if test="height != null "> and height = #{height}</if>
+            <if test="weight != null "> and weight = #{weight}</if>
+            <if test="bloodType != null  and bloodType != ''"> and blood_type = #{bloodType}</if>
+            <if test="personalInfo != null  and personalInfo != ''"> and personal_info = #{personalInfo}</if>
+            <if test="familyInfo != null  and familyInfo != ''"> and family_info = #{familyInfo}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisPatientFileByFileId" parameterType="Long" resultMap="VrHisPatientFileResult">
+        <include refid="selectVrHisPatientFileVo"/>
+        where file_id = #{fileId}
+    </select>
+        
+    <insert id="insertVrHisPatientFile" parameterType="VrHisPatientFile" useGeneratedKeys="true" keyProperty="fileId">
+        insert into vr_his_patient_file
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="patientId != null">patient_id,</if>
+            <if test="emergencyContactName != null and emergencyContactName != ''">emergency_contact_name,</if>
+            <if test="emergencyContactMobile != null and emergencyContactMobile != ''">emergency_contact_mobile,</if>
+            <if test="emergencyContactRelation != null">emergency_contact_relation,</if>
+            <if test="leftEarHearing != null">left_ear_hearing,</if>
+            <if test="rightEarHearing != null">right_ear_hearing,</if>
+            <if test="leftVision != null">left_vision,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="rightVision != null">right_vision,</if>
+            <if test="height != null">height,</if>
+            <if test="weight != null">weight,</if>
+            <if test="bloodType != null and bloodType != ''">blood_type,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="personalInfo != null and personalInfo != ''">personal_info,</if>
+            <if test="familyInfo != null and familyInfo != ''">family_info,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="patientId != null">#{patientId},</if>
+            <if test="emergencyContactName != null and emergencyContactName != ''">#{emergencyContactName},</if>
+            <if test="emergencyContactMobile != null and emergencyContactMobile != ''">#{emergencyContactMobile},</if>
+            <if test="emergencyContactRelation != null">#{emergencyContactRelation},</if>
+            <if test="leftEarHearing != null">#{leftEarHearing},</if>
+            <if test="rightEarHearing != null">#{rightEarHearing},</if>
+            <if test="leftVision != null">#{leftVision},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="rightVision != null">#{rightVision},</if>
+            <if test="height != null">#{height},</if>
+            <if test="weight != null">#{weight},</if>
+            <if test="bloodType != null and bloodType != ''">#{bloodType},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="personalInfo != null and personalInfo != ''">#{personalInfo},</if>
+            <if test="familyInfo != null and familyInfo != ''">#{familyInfo},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisPatientFile" parameterType="VrHisPatientFile">
+        update vr_his_patient_file
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="patientId != null">patient_id = #{patientId},</if>
+            <if test="emergencyContactName != null and emergencyContactName != ''">emergency_contact_name = #{emergencyContactName},</if>
+            <if test="emergencyContactMobile != null and emergencyContactMobile != ''">emergency_contact_mobile = #{emergencyContactMobile},</if>
+            <if test="emergencyContactRelation != null">emergency_contact_relation = #{emergencyContactRelation},</if>
+            <if test="leftEarHearing != null">left_ear_hearing = #{leftEarHearing},</if>
+            <if test="rightEarHearing != null">right_ear_hearing = #{rightEarHearing},</if>
+            <if test="leftVision != null">left_vision = #{leftVision},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="rightVision != null">right_vision = #{rightVision},</if>
+            <if test="height != null">height = #{height},</if>
+            <if test="weight != null">weight = #{weight},</if>
+            <if test="bloodType != null and bloodType != ''">blood_type = #{bloodType},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="personalInfo != null and personalInfo != ''">personal_info = #{personalInfo},</if>
+            <if test="familyInfo != null and familyInfo != ''">family_info = #{familyInfo},</if>
+        </trim>
+        where file_id = #{fileId}
+    </update>
+
+    <delete id="deleteVrHisPatientFileByFileId" parameterType="Long">
+        delete from vr_his_patient_file where file_id = #{fileId}
+    </delete>
+
+    <delete id="deleteVrHisPatientFileByFileIds" parameterType="String">
+        delete from vr_his_patient_file where file_id in 
+        <foreach item="fileId" collection="array" open="(" separator="," close=")">
+            #{fileId}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.department.mapper.VrHisHospitalMedicinesRelationMapper">
+    
+    <resultMap type="VrHisHospitalMedicinesRelation" id="VrHisHospitalMedicinesRelationResult">
+        <result property="hmrId"    column="hmr_id"    />
+        <result property="medicinesId"    column="medicines_id"    />
+        <result property="hospitalId"    column="hospital_id"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectVrHisHospitalMedicinesRelationVo">
+        select hmr_id, medicines_id, hospital_id, create_time, update_time from vr_his_hospital_medicines_relation
+    </sql>
+
+    <select id="selectVrHisHospitalMedicinesRelationList" parameterType="VrHisHospitalMedicinesRelation" resultMap="VrHisHospitalMedicinesRelationResult">
+        <include refid="selectVrHisHospitalMedicinesRelationVo"/>
+        <where>  
+            <if test="medicinesId != null "> and medicines_id = #{medicinesId}</if>
+            <if test="hospitalId != null "> and hospital_id = #{hospitalId}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisHospitalMedicinesRelationByHmrId" parameterType="Long" resultMap="VrHisHospitalMedicinesRelationResult">
+        <include refid="selectVrHisHospitalMedicinesRelationVo"/>
+        where hmr_id = #{hmrId}
+    </select>
+        
+    <insert id="insertVrHisHospitalMedicinesRelation" parameterType="VrHisHospitalMedicinesRelation" useGeneratedKeys="true" keyProperty="hmrId">
+        insert into vr_his_hospital_medicines_relation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="medicinesId != null">medicines_id,</if>
+            <if test="hospitalId != null">hospital_id,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="medicinesId != null">#{medicinesId},</if>
+            <if test="hospitalId != null">#{hospitalId},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisHospitalMedicinesRelation" parameterType="VrHisHospitalMedicinesRelation">
+        update vr_his_hospital_medicines_relation
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="medicinesId != null">medicines_id = #{medicinesId},</if>
+            <if test="hospitalId != null">hospital_id = #{hospitalId},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where hmr_id = #{hmrId}
+    </update>
+
+    <delete id="deleteVrHisHospitalMedicinesRelationByHmrId" parameterType="Long">
+        delete from vr_his_hospital_medicines_relation where hmr_id = #{hmrId}
+    </delete>
+
+    <delete id="deleteVrHisHospitalMedicinesRelationByHmrIds" parameterType="String">
+        delete from vr_his_hospital_medicines_relation where hmr_id in 
+        <foreach item="hmrId" collection="array" open="(" separator="," close=")">
+            #{hmrId}
+        </foreach>
+    </delete>
+</mapper>

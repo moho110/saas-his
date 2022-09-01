@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.department.mapper.VrHisHospitalDoctorRelationMapper">
+    
+    <resultMap type="VrHisHospitalDoctorRelation" id="VrHisHospitalDoctorRelationResult">
+        <result property="rid"    column="rid"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="hospitalId"    column="hospital_id"    />
+        <result property="departmentId"    column="department_id"    />
+        <result property="physicianid"    column="physicianid"    />
+        <result property="rightList"    column="right_list"    />
+        <result property="titleLevel"    column="title_level"    />
+    </resultMap>
+
+    <sql id="selectVrHisHospitalDoctorRelationVo">
+        select rid, create_time, update_time, hospital_id, department_id, physicianid, right_list, title_level from vr_his_hospital_doctor_relation
+    </sql>
+
+    <select id="selectVrHisHospitalDoctorRelationList" parameterType="VrHisHospitalDoctorRelation" resultMap="VrHisHospitalDoctorRelationResult">
+        <include refid="selectVrHisHospitalDoctorRelationVo"/>
+        <where>  
+            <if test="hospitalId != null "> and hospital_id = #{hospitalId}</if>
+            <if test="departmentId != null "> and department_id = #{departmentId}</if>
+            <if test="physicianid != null "> and physicianid = #{physicianid}</if>
+            <if test="rightList != null  and rightList != ''"> and right_list = #{rightList}</if>
+            <if test="titleLevel != null "> and title_level = #{titleLevel}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisHospitalDoctorRelationByRid" parameterType="Long" resultMap="VrHisHospitalDoctorRelationResult">
+        <include refid="selectVrHisHospitalDoctorRelationVo"/>
+        where rid = #{rid}
+    </select>
+        
+    <insert id="insertVrHisHospitalDoctorRelation" parameterType="VrHisHospitalDoctorRelation" useGeneratedKeys="true" keyProperty="rid">
+        insert into vr_his_hospital_doctor_relation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="hospitalId != null">hospital_id,</if>
+            <if test="departmentId != null">department_id,</if>
+            <if test="physicianid != null">physicianid,</if>
+            <if test="rightList != null and rightList != ''">right_list,</if>
+            <if test="titleLevel != null">title_level,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="hospitalId != null">#{hospitalId},</if>
+            <if test="departmentId != null">#{departmentId},</if>
+            <if test="physicianid != null">#{physicianid},</if>
+            <if test="rightList != null and rightList != ''">#{rightList},</if>
+            <if test="titleLevel != null">#{titleLevel},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisHospitalDoctorRelation" parameterType="VrHisHospitalDoctorRelation">
+        update vr_his_hospital_doctor_relation
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="hospitalId != null">hospital_id = #{hospitalId},</if>
+            <if test="departmentId != null">department_id = #{departmentId},</if>
+            <if test="physicianid != null">physicianid = #{physicianid},</if>
+            <if test="rightList != null and rightList != ''">right_list = #{rightList},</if>
+            <if test="titleLevel != null">title_level = #{titleLevel},</if>
+        </trim>
+        where rid = #{rid}
+    </update>
+
+    <delete id="deleteVrHisHospitalDoctorRelationByRid" parameterType="Long">
+        delete from vr_his_hospital_doctor_relation where rid = #{rid}
+    </delete>
+
+    <delete id="deleteVrHisHospitalDoctorRelationByRids" parameterType="String">
+        delete from vr_his_hospital_doctor_relation where rid in 
+        <foreach item="rid" collection="array" open="(" separator="," close=")">
+            #{rid}
+        </foreach>
+    </delete>
+</mapper>

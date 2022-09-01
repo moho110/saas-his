@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.xsystem.mapper.VrHisWxopenidCacheMapper">
+    
+    <resultMap type="VrHisWxopenidCache" id="VrHisWxopenidCacheResult">
+        <result property="id"    column="id"    />
+        <result property="appid"    column="appid"    />
+        <result property="openid"    column="openid"    />
+        <result property="url"    column="url"    />
+    </resultMap>
+
+    <sql id="selectVrHisWxopenidCacheVo">
+        select id, appid, openid, url from vr_his_wxopenid_cache
+    </sql>
+
+    <select id="selectVrHisWxopenidCacheList" parameterType="VrHisWxopenidCache" resultMap="VrHisWxopenidCacheResult">
+        <include refid="selectVrHisWxopenidCacheVo"/>
+        <where>  
+            <if test="appid != null  and appid != ''"> and appid = #{appid}</if>
+            <if test="openid != null  and openid != ''"> and openid = #{openid}</if>
+            <if test="url != null  and url != ''"> and url = #{url}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisWxopenidCacheById" parameterType="Integer" resultMap="VrHisWxopenidCacheResult">
+        <include refid="selectVrHisWxopenidCacheVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertVrHisWxopenidCache" parameterType="VrHisWxopenidCache" useGeneratedKeys="true" keyProperty="id">
+        insert into vr_his_wxopenid_cache
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="appid != null">appid,</if>
+            <if test="openid != null">openid,</if>
+            <if test="url != null">url,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="appid != null">#{appid},</if>
+            <if test="openid != null">#{openid},</if>
+            <if test="url != null">#{url},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisWxopenidCache" parameterType="VrHisWxopenidCache">
+        update vr_his_wxopenid_cache
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="appid != null">appid = #{appid},</if>
+            <if test="openid != null">openid = #{openid},</if>
+            <if test="url != null">url = #{url},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteVrHisWxopenidCacheById" parameterType="Integer">
+        delete from vr_his_wxopenid_cache where id = #{id}
+    </delete>
+
+    <delete id="deleteVrHisWxopenidCacheByIds" parameterType="String">
+        delete from vr_his_wxopenid_cache where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

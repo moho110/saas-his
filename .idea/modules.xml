@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/saas-his.iml" filepath="$PROJECT_DIR$/.idea/saas-his.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrmlstudio-admin/vrmlstudio-admin.iml" filepath="$PROJECT_DIR$/vrmlstudio-admin/vrmlstudio-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrmlstudio-saas-his-modules/vrmlstudio-basic-modules/vrmlstudio-basic-modules.iml" filepath="$PROJECT_DIR$/vrmlstudio-saas-his-modules/vrmlstudio-basic-modules/vrmlstudio-basic-modules.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrmlstudio-common/vrmlstudio-common.iml" filepath="$PROJECT_DIR$/vrmlstudio-common/vrmlstudio-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrmlstudio-crm/vrmlstudio-crm.iml" filepath="$PROJECT_DIR$/vrmlstudio-crm/vrmlstudio-crm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrmlstudio-saas-his-modules/vrmlstudio-department-modules/vrmlstudio-department-modules.iml" filepath="$PROJECT_DIR$/vrmlstudio-saas-his-modules/vrmlstudio-department-modules/vrmlstudio-department-modules.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrmlstudio-framework/vrmlstudio-framework.iml" filepath="$PROJECT_DIR$/vrmlstudio-framework/vrmlstudio-framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrmlstudio-saas-his-modules/vrmlstudio-medicine-modules/vrmlstudio-medicine-modules.iml" filepath="$PROJECT_DIR$/vrmlstudio-saas-his-modules/vrmlstudio-medicine-modules/vrmlstudio-medicine-modules.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrmlstudio-saas-his-modules/vrmlstudio-person-modules/vrmlstudio-person-modules.iml" filepath="$PROJECT_DIR$/vrmlstudio-saas-his-modules/vrmlstudio-person-modules/vrmlstudio-person-modules.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrmlstudio-saas-his-modules/vrmlstudio-saas-his-modules.iml" filepath="$PROJECT_DIR$/vrmlstudio-saas-his-modules/vrmlstudio-saas-his-modules.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrmlstudio-saas-his-modules/vrmlstudio-sales-modules/vrmlstudio-sales-modules.iml" filepath="$PROJECT_DIR$/vrmlstudio-saas-his-modules/vrmlstudio-sales-modules/vrmlstudio-sales-modules.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrmlstudio-system/vrmlstudio-system.iml" filepath="$PROJECT_DIR$/vrmlstudio-system/vrmlstudio-system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrmlstudio-tenant/vrmlstudio-tenant.iml" filepath="$PROJECT_DIR$/vrmlstudio-tenant/vrmlstudio-tenant.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrmlstudio-saas-his-modules/vrmlstudio-xsystem-modules/vrmlstudio-xsystem-modules.iml" filepath="$PROJECT_DIR$/vrmlstudio-saas-his-modules/vrmlstudio-xsystem-modules/vrmlstudio-xsystem-modules.iml" />
+    </modules>
+  </component>
+</project>

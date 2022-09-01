@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.medicine.mapper.VrHisBatchesOfInventoryMapper">
+    
+    <resultMap type="VrHisBatchesOfInventory" id="VrHisBatchesOfInventoryResult">
+        <result property="batchesOfInventoryId"    column="batches_of_inventory_id"    />
+        <result property="companyId"    column="company_id"    />
+        <result property="supplierId"    column="supplier_id"    />
+        <result property="batchesOfInventoryNumber"    column="batches_of_inventory_number"    />
+        <result property="purchasingAgentId"    column="purchasing_agent_id"    />
+        <result property="batchesOfInventoryTotalMoney"    column="batches_of_inventory_total_money"    />
+        <result property="batchesOfInventoryDate"    column="batches_of_inventory_date"    />
+        <result property="batchesOfInventoryStatus"    column="batches_of_inventory_status"    />
+        <result property="batchesOfInventoryVerifier"    column="batches_of_inventory_verifier"    />
+        <result property="batchesOfInventoryVerifierDate"    column="batches_of_inventory_verifier_date"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectVrHisBatchesOfInventoryVo">
+        select batches_of_inventory_id, company_id, supplier_id, batches_of_inventory_number, purchasing_agent_id, batches_of_inventory_total_money, batches_of_inventory_date, batches_of_inventory_status, batches_of_inventory_verifier, batches_of_inventory_verifier_date, create_time, update_time from vr_his_batches_of_inventory
+    </sql>
+
+    <select id="selectVrHisBatchesOfInventoryList" parameterType="VrHisBatchesOfInventory" resultMap="VrHisBatchesOfInventoryResult">
+        <include refid="selectVrHisBatchesOfInventoryVo"/>
+        <where>  
+            <if test="companyId != null "> and company_id = #{companyId}</if>
+            <if test="supplierId != null "> and supplier_id = #{supplierId}</if>
+            <if test="batchesOfInventoryNumber != null "> and batches_of_inventory_number = #{batchesOfInventoryNumber}</if>
+            <if test="purchasingAgentId != null "> and purchasing_agent_id = #{purchasingAgentId}</if>
+            <if test="batchesOfInventoryTotalMoney != null "> and batches_of_inventory_total_money = #{batchesOfInventoryTotalMoney}</if>
+            <if test="batchesOfInventoryDate != null  and batchesOfInventoryDate != ''"> and batches_of_inventory_date = #{batchesOfInventoryDate}</if>
+            <if test="batchesOfInventoryStatus != null "> and batches_of_inventory_status = #{batchesOfInventoryStatus}</if>
+            <if test="batchesOfInventoryVerifier != null "> and batches_of_inventory_verifier = #{batchesOfInventoryVerifier}</if>
+            <if test="batchesOfInventoryVerifierDate != null  and batchesOfInventoryVerifierDate != ''"> and batches_of_inventory_verifier_date = #{batchesOfInventoryVerifierDate}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisBatchesOfInventoryByBatchesOfInventoryId" parameterType="Integer" resultMap="VrHisBatchesOfInventoryResult">
+        <include refid="selectVrHisBatchesOfInventoryVo"/>
+        where batches_of_inventory_id = #{batchesOfInventoryId}
+    </select>
+        
+    <insert id="insertVrHisBatchesOfInventory" parameterType="VrHisBatchesOfInventory" useGeneratedKeys="true" keyProperty="batchesOfInventoryId">
+        insert into vr_his_batches_of_inventory
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="companyId != null">company_id,</if>
+            <if test="supplierId != null">supplier_id,</if>
+            <if test="batchesOfInventoryNumber != null">batches_of_inventory_number,</if>
+            <if test="purchasingAgentId != null">purchasing_agent_id,</if>
+            <if test="batchesOfInventoryTotalMoney != null">batches_of_inventory_total_money,</if>
+            <if test="batchesOfInventoryDate != null and batchesOfInventoryDate != ''">batches_of_inventory_date,</if>
+            <if test="batchesOfInventoryStatus != null">batches_of_inventory_status,</if>
+            <if test="batchesOfInventoryVerifier != null">batches_of_inventory_verifier,</if>
+            <if test="batchesOfInventoryVerifierDate != null">batches_of_inventory_verifier_date,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="companyId != null">#{companyId},</if>
+            <if test="supplierId != null">#{supplierId},</if>
+            <if test="batchesOfInventoryNumber != null">#{batchesOfInventoryNumber},</if>
+            <if test="purchasingAgentId != null">#{purchasingAgentId},</if>
+            <if test="batchesOfInventoryTotalMoney != null">#{batchesOfInventoryTotalMoney},</if>
+            <if test="batchesOfInventoryDate != null and batchesOfInventoryDate != ''">#{batchesOfInventoryDate},</if>
+            <if test="batchesOfInventoryStatus != null">#{batchesOfInventoryStatus},</if>
+            <if test="batchesOfInventoryVerifier != null">#{batchesOfInventoryVerifier},</if>
+            <if test="batchesOfInventoryVerifierDate != null">#{batchesOfInventoryVerifierDate},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisBatchesOfInventory" parameterType="VrHisBatchesOfInventory">
+        update vr_his_batches_of_inventory
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="companyId != null">company_id = #{companyId},</if>
+            <if test="supplierId != null">supplier_id = #{supplierId},</if>
+            <if test="batchesOfInventoryNumber != null">batches_of_inventory_number = #{batchesOfInventoryNumber},</if>
+            <if test="purchasingAgentId != null">purchasing_agent_id = #{purchasingAgentId},</if>
+            <if test="batchesOfInventoryTotalMoney != null">batches_of_inventory_total_money = #{batchesOfInventoryTotalMoney},</if>
+            <if test="batchesOfInventoryDate != null and batchesOfInventoryDate != ''">batches_of_inventory_date = #{batchesOfInventoryDate},</if>
+            <if test="batchesOfInventoryStatus != null">batches_of_inventory_status = #{batchesOfInventoryStatus},</if>
+            <if test="batchesOfInventoryVerifier != null">batches_of_inventory_verifier = #{batchesOfInventoryVerifier},</if>
+            <if test="batchesOfInventoryVerifierDate != null">batches_of_inventory_verifier_date = #{batchesOfInventoryVerifierDate},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where batches_of_inventory_id = #{batchesOfInventoryId}
+    </update>
+
+    <delete id="deleteVrHisBatchesOfInventoryByBatchesOfInventoryId" parameterType="Integer">
+        delete from vr_his_batches_of_inventory where batches_of_inventory_id = #{batchesOfInventoryId}
+    </delete>
+
+    <delete id="deleteVrHisBatchesOfInventoryByBatchesOfInventoryIds" parameterType="String">
+        delete from vr_his_batches_of_inventory where batches_of_inventory_id in 
+        <foreach item="batchesOfInventoryId" collection="array" open="(" separator="," close=")">
+            #{batchesOfInventoryId}
+        </foreach>
+    </delete>
+</mapper>

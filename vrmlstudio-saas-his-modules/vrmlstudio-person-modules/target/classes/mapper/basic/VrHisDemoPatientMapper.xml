@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.person.mapper.VrHisDemoPatientMapper">
+    
+    <resultMap type="VrHisDemoPatient" id="VrHisDemoPatientResult">
+        <result property="id"    column="id"    />
+        <result property="pname"    column="pname"    />
+        <result property="mobile"    column="mobile"    />
+    </resultMap>
+
+    <sql id="selectVrHisDemoPatientVo">
+        select id, pname, mobile from vr_his_demo_patient
+    </sql>
+
+    <select id="selectVrHisDemoPatientList" parameterType="VrHisDemoPatient" resultMap="VrHisDemoPatientResult">
+        <include refid="selectVrHisDemoPatientVo"/>
+        <where>  
+            <if test="pname != null  and pname != ''"> and pname like concat('%', #{pname}, '%')</if>
+            <if test="mobile != null  and mobile != ''"> and mobile = #{mobile}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisDemoPatientById" parameterType="Integer" resultMap="VrHisDemoPatientResult">
+        <include refid="selectVrHisDemoPatientVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertVrHisDemoPatient" parameterType="VrHisDemoPatient" useGeneratedKeys="true" keyProperty="id">
+        insert into vr_his_demo_patient
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pname != null">pname,</if>
+            <if test="mobile != null">mobile,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pname != null">#{pname},</if>
+            <if test="mobile != null">#{mobile},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisDemoPatient" parameterType="VrHisDemoPatient">
+        update vr_his_demo_patient
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="pname != null">pname = #{pname},</if>
+            <if test="mobile != null">mobile = #{mobile},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteVrHisDemoPatientById" parameterType="Integer">
+        delete from vr_his_demo_patient where id = #{id}
+    </delete>
+
+    <delete id="deleteVrHisDemoPatientByIds" parameterType="String">
+        delete from vr_his_demo_patient where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

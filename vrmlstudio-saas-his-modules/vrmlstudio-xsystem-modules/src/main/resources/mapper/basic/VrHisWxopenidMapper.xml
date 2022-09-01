@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.xsystem.mapper.VrHisWxopenidMapper">
+    
+    <resultMap type="VrHisWxopenid" id="VrHisWxopenidResult">
+        <result property="id"    column="id"    />
+        <result property="appid"    column="appid"    />
+        <result property="openid"    column="openid"    />
+        <result property="userid"    column="userid"    />
+        <result property="usertype"    column="usertype"    />
+        <result property="addtime"    column="addtime"    />
+    </resultMap>
+
+    <sql id="selectVrHisWxopenidVo">
+        select id, appid, openid, userid, usertype, addtime from vr_his_wxopenid
+    </sql>
+
+    <select id="selectVrHisWxopenidList" parameterType="VrHisWxopenid" resultMap="VrHisWxopenidResult">
+        <include refid="selectVrHisWxopenidVo"/>
+        <where>  
+            <if test="appid != null  and appid != ''"> and appid = #{appid}</if>
+            <if test="openid != null  and openid != ''"> and openid = #{openid}</if>
+            <if test="userid != null "> and userid = #{userid}</if>
+            <if test="usertype != null "> and usertype = #{usertype}</if>
+            <if test="addtime != null "> and addtime = #{addtime}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisWxopenidById" parameterType="Integer" resultMap="VrHisWxopenidResult">
+        <include refid="selectVrHisWxopenidVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertVrHisWxopenid" parameterType="VrHisWxopenid" useGeneratedKeys="true" keyProperty="id">
+        insert into vr_his_wxopenid
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="appid != null">appid,</if>
+            <if test="openid != null">openid,</if>
+            <if test="userid != null">userid,</if>
+            <if test="usertype != null">usertype,</if>
+            <if test="addtime != null">addtime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="appid != null">#{appid},</if>
+            <if test="openid != null">#{openid},</if>
+            <if test="userid != null">#{userid},</if>
+            <if test="usertype != null">#{usertype},</if>
+            <if test="addtime != null">#{addtime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisWxopenid" parameterType="VrHisWxopenid">
+        update vr_his_wxopenid
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="appid != null">appid = #{appid},</if>
+            <if test="openid != null">openid = #{openid},</if>
+            <if test="userid != null">userid = #{userid},</if>
+            <if test="usertype != null">usertype = #{usertype},</if>
+            <if test="addtime != null">addtime = #{addtime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteVrHisWxopenidById" parameterType="Integer">
+        delete from vr_his_wxopenid where id = #{id}
+    </delete>
+
+    <delete id="deleteVrHisWxopenidByIds" parameterType="String">
+        delete from vr_his_wxopenid where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

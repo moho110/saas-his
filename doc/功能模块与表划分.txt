@@ -1,0 +1,166 @@
+个人办公        xinhu-person    
+
+import com.vrmlstudio.R;
+
+adapter
+
+fragment
+
+fiew
+
+Entity
+
+xinhu_homeitems   桌面项目表   modules/person/xinhu-person/homeitems/index
+xinhu_admin   用户表            modules/person/xinhu-person/admin/index
+xinhu_areas 区域表   modules/person/xinhu-person/areas/index
+xinhu_book 图书表   modules/person/xinhu-person/book/index
+xinhu_bookborrow   图书借阅  modules/person/xinhu-person/bookborrow/index
+xinhu_company  公司单位表   modules/person/xinhu-person/company/index
+xinhu_city    城市表   modules/person/xinhu-person/city/index
+xinhu_meet     会议   modules/person/xinhu-person/meet/index
+xinhu_menu     系统菜单    modules/person/xinhu-person/menu/index
+xinhu_news     新闻资讯    modules/person/xinhu-person/news/index
+xinhu_userinfo  用户档案表   modules/person/xinhu-person/userinfo/index
+xinhu_userinfos    人员档案子表   modules/person/xinhu-person/userinfos/index
+xinhu_userract     用户合同表   modules/person/xinhu-person/userract/index
+
+xinhu-person of modules has writen
+
+工作流      xinhu-flow    
+xinhu_flow_checks  单据的审核人   modules/flow/xinhu-flow/checks/index
+xinhu_flow_cname   自定义审核人组   modules/flow/xinhu-flow/cname/index
+xinhu_flow_course  流程步骤表      modules/flow/xinhu-flow/course/index
+xinhu_flow_element 模块元素      modules/flow/xinhu-flow/element/index
+xinhu_flow_extent  模块权限      modules/flow/xinhu-flow/extent/index
+xinhu_flow_log     单据操作记录  modules/flow/xinhu-flow/log/index
+xinhu_flow_modetpl  模块多模版设置表   modules/flow/xinhu-flow/modetpl/index
+xinhu_flow_remind   单据提醒设置表   modules/flow/remind/index
+xinhu_flow_set      流程模块    modules/flow/xinhu-flow/set/index
+xinhu_flow_todo     单据通知设置表  modules/flow/xinhu-flow/todo/index
+xinhu_flow_todos    单据通知给对应人员    modules/flow/xinhu-flow/todos/index
+xinhu_flow_where    单据条件  modules/flow/xinhu-flow/where/index
+
+
+任务资源 xinhu-resources  
+XinhuWork    任务     modules/resources/xinhu-resources/work/index
+XinhuProject   项目表  modules/resources/xinhu-resources/project/index
+XinhuSubscribe   订阅管理表   3  modules/resources/xinhu-resources/subscribe/index
+XinhuSubscribeinfo   订阅内容信息 4 ??????   modules/resources/xinhu-resources/subscribeinfo/index
+XinhuTask      计划任务  5  modules/resources/xinhu-resources/task/index
+XinhuTodo       提醒消息表 6  modules/resources/xinhu-resources/todo/index
+XinhuScheduld   日程待办   7  modules/resources/xinhu-resources/scheduld/index
+XinhuSchedule   日程   8  modules/resources/xinhu-resources/schedule/index
+XinhuUserzheng   说明  9  modules/resources/xinhu-resources/userzheng/index
+
+公文             xinhu-document 
+XxinhuWenjuat   问卷表子表 2  modules/document/xinhu-document/wenjuat/index
+XinhuWenjuau   问卷表子表 3  modules/document/xinhu-document/wenjuau/index
+XinhuWorc      文档分区表 4  modules/document/xinhu-document/worc/index
+XinhuWord      文档表  5 modules/document/xinhu-document/word/index
+XinhuWordeil   文件传送 6 modules/document/xinhu-document/wordeil/index
+XinhuWordxie   文档协作  6 modules/document/xinhu-document/wordxie/index
+XinhuOfficial  公文 7  modules/document/xinhu-document/official/index
+XinhuSeal     印章表    8  modules/document/xinhu-document/seal/index
+XinhuSealapl  印章申请使用表   modules/document/xinhu-document/sealapl/index
+
+人力考勤       xinhu-hr          
+xinhu_hrcheck   考核评分表    1  modules/hr/xinhu-hr/hrcheck/index
+xinhu_hrcheckn  考核评分记录  2  modules/hr/xinhu-hr/hrcheckn/index
+xinhu_hrchecks  考评内容      3  modules/hr/xinhu-hr/hrchecks/index
+xinhu_hrdemint   面试和人员需求表 4     modules/hr/xinhu-hr/hrdemint/index
+xinhu_hrkaohem    考核项目       5  modules/hr/xinhu-hr/hrkaohem/index
+xinhu_hrkaohen    考核项目人员    6  modules/hr/xinhu-hr/hrkaohen/index
+xinhu_hrkaohes    考核项目的内容  7   modules/hr/xinhu-hr/hrkaohes/index
+xinhu_hrpositive   HR转正     8 modules/hr/xinhu-hr/hrpositive/index
+xinhu_hrredund     离职申请    9  modules/hr/xinhu-hr/hrredund/index
+xinhu_hrsalarm     薪资模版   10  modules/hr/xinhu-hr/hrsalarm/index
+/////////////////////////////////////////////////////////////////////////////////
+xinhu_hrsalars     薪资模版子表  11   modules/hr/xinhu-hr/hrsalars/index
+xinhu_hrsalary     工资表    12  modules/hr/xinhu-hr/hrsalary/index
+xinhu_hrshebao     社保公积金    modules/hr/xinhu-hr/hrshebao/index
+xinhu_hrtransfer   职位调动    modules/hr/xinhu-hr/hrtransfer/index
+xinhu_hrtrsalary   调薪申请    modules/hr/xinhu-hr/hrtrsalary/index
+xinhu_im_group     IM会话表   modules/hr/xinhu-hr/imgroup/index
+xinhu_im_groupuser  IM会话人员   modules/hr/xinhu-hr/imgroupuser/index
+xinhu_im_history     IM会话记录历史表   modules/hr/xinhu-hr/imhistory/index
+xinhu_im_menu        IM下应用菜单   modules/hr/xinhu-hr/immenu/index           VR??????
+xinhu_im_mess       IM聊天记录表     modules/hr/xinhu-hr/immess/index
+//////////////////////////////////////////////////////////////////////////////////////
+xinhu_im_messzt     IM聊天消息状态表    modules/hr/xinhu-hr/immesszt/index
+xinhu_infor        通知公告      modules/hr/xinhu-hr/infor/index
+xinhu_infors       信息子表投票项      modules/hr/xinhu-hr/infors/index
+xinhu_knowledge    知识信息        modules/hr/xinhu-hr/knowledge/index
+xinhu_knowtiku      知识题库 xinhu-hr    modules/hr/xinhu-hr/knowtiku/index       ????me.zhengjie.vrmlstudio.hr             ???·????modules\hr
+xinhu_knowtraim     培训表出题考试   modules/hr/xinhu-hr/knowtraim/index
+xinhu_knowtrais     考试培训子表   modules/hr/xinhu-hr/knowtrais/index
+xinhu_kqanay       考勤分析  modules/hr/xinhu-hr/kqanay/index  G:\javaweb\eladmin-web\src\views\modules\hr
+xinhu_kqdist       考勤分配表   modules/hr/xinhu-hr/kqdist/index
+xinhu_kqdisv    考勤排班   modules/hr/xinhu-hr/kqdisv/index
+/////////////////////////////////////////////////////////////////////////////////
+xinhu_kqdkjl     打卡记录  modules/hr/xinhu-hr/kqdkjl/index
+xinhu_kqdw      考勤定位规则  modules/hr/xinhu-hr/kqdw/index
+xinhu_kqerr      打卡异常申请     modules/hr/xinhu-hr/kqerr/index
+xinhu_kqinfo    请假条加班单    modules/hr/xinhu-hr/kqinfo/index
+xinhu_kqjcmd   考勤机命令发送表       modules/hr/xinhu-hr/kqjcmd/index        VR??????
+xinhu_kqjsn      考勤机设备表     modules/hr/xinhu-hr/kqjsn/index
+xinhu_kqjuser   考勤机上人员      modules/hr/xinhu-hr/kqjuser/index
+xinhu_kqout     外出出差     modules/hr/xinhu-hr/kqout/index
+xinhu_kqsjgz    考勤时间规则     modules/hr/xinhu-hr/kqsjgz/index
+xinhu_kqxxsj    休息时间规则      modules/hr/xinhu-hr/kqxxsj/index
+xinhu_location   外勤定位    modules/hr/xinhu-hr/location/index
+xinhu_reward     奖惩    modules/hr/xinhu-hr/reward/index
+xinhu_vcard     个人通讯录     modules/hr/xinhu-hr/vcard/index
+////////////////////////////////////////////////////////////////////////////////////////////
+????              xinhu-police  ????me.zhengjie.vrmlstudio.police         ???·????modules\police     VR??????   10
+XinhuEditrecord   修改记录表    modules/police/xinhu-police/editrecord/index
+XinhuEmailm     邮件主表     modules/police/xinhu-police/emailm/index???????????.??????? 2022.3.10
+XinhuEmails     邮件子表      modules/police/xinhu-police/emails/index
+XinhuEmailCont   系统发送邮件内容  modules/police/xinhu-police/emailcont/index
+XinhuFile       上传文件记录表  modules/police/xinhu-police/file/index
+XinhuFiles      文件记录下载和预览  modules/police/xinhu-police/files/index
+XinhuFininfom   费用报销  modules/police/xinhu-police/fininfom/index    G:\javaweb\eladmin-web\src\views\modules\police
+XinhuFininfos   费用报销子表    modules/police/xinhu-police/fininfos/index
+XinhuFinpiao    发票管理表   modules/police/xinhu-police/finpiao/index
+XinhuFlow_bill  流程单据   modules/police/xinhu-police/flowbill/index
+XinhuFlow_chao  抄送表   modules/police/xinhu-police/flowchao/index
+XinhuGoodm      物品领用采购申请主表   modules/police/xinhu-police/goodm/index      ??????           VR??????
+XinhuGoodn      物品库存详细表    modules/police/xinhu-police/goodn/index
+XinhuGoods     物品表    modules/police/xinhu-police/goods/index
+XinhuGoodss    物品库存详细表    modules/police/xinhu-police/goodss/index
+XinhuAssetm  固定资产表    modules/police/xinhu-police/assetm/index
+XinhuRepair   维修报修   modules/police/xinhu-police/repair/index
+XinhuGctodo    工程通知   modules/police/xinhu-police/gctodo/index
+XinhuGodepot    物品仓库表   modules/police/xinhu-police/godepot/index
+
+财务          xinhu-finance     
+XinhuCustappy  客户申请使用  1     modules/finance/xinhu-finance/custappy/index
+XinhuCustfina  客户收付款   2     modules/finance/xinhu-finance/custfina/index
+XinhuCustomer  客户      3   modules/finance/xinhu-finance/customer/index
+XinhuCustplan  跟进计划   4   modules/finance/xinhu-finance/custplan/indexX
+XinhuCustract   客户合同   5   modules/finance/xinhu-finance/custract/index
+XinhuCustsale   销售机会    6   mkmodules/finance/xinhu-finance/custsale/index
+XinhuDaily      日报     7  modules/finance/xinhu-finance/daily/index        G:\javaweb\eladmin-web\src\views\modules\finance
+XinhuDailyfx  8  日报分析统计表      modules/finance/xinhu-finance/dailyfx/index
+XinhuDemo     9  演示测试模块       modules/finance/xinhu-finance/demo/index
+XinhuDept     10  组织结构部门      modules/finance/xinhu-finance/dept/index
+XinhuCarm      11 车辆表      modules/finance/xinhu-finance/carm/indexX
+XinhuCarmang   12  车辆维修保养记录表     modules/finance/xinhu-finance/carmang/index
+XinhuCarmrese   13 车辆预定    modules/finance/xinhu-finance/carmrese/index
+XinhuCarms      14 车辆信息登记表     modules/finance/xinhu-finance/carms/index
+XinhuReads    15 单据浏览记录表    modules/finance/xinhu-finance/reads/index
+XinhuReceipt  16  回执确认表        modules/finance/xinhu-finance/receipt/index
+XinhuTovoid   17  单据申请作废表      modules/finance/xinhu-finance/tovoid/index
+
+系统管理        xinhu-system      
+XinhuWotpl  1  微信公众号消息模版   modules/system/xinhu-system/wotpl/index
+XinhuWouser 2  微信用户信息表       modules/system/xinhu-system/wouser/index
+XinhuWxtx_renlian  3  人脸识别         modules/system/xinhu-system/wxtxrenlian/index
+XinhuZreim_user  4   REIM即时通讯平台用户     modules/system/xinhu-system/zreimuser/index    
+XinhuGroup   5  系统组          modules/system/xinhu-system/group/index    G:\javaweb\eladmin-web\src\views\modules\system
+XinhuChargems  6 系统升级         modules/system/xinhu-system/chargems/index
+XinhuLog       7  系统日志      modules/system/xinhu-system/log/index
+XinhuLogintoken  8  系统登录token  modules/system/xinhu-system/logintoken/index    
+XinhuOption    9  系统选项      modules/system/xinhu-system/option/index
+XinhuSjoin   10  后台菜单权限     modules/system/xinhu-system/sjoin/index
+
+/////////////////////////////////////////////////////////////////////

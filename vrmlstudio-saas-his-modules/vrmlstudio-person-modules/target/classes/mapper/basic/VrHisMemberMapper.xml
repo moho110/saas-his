@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.person.mapper.VrHisMemberMapper">
+    
+    <resultMap type="VrHisMember" id="VrHisMemberResult">
+        <result property="uid"    column="uid"    />
+        <result property="userName"    column="user_name"    />
+        <result property="password"    column="password"    />
+        <result property="lastLoginTime"    column="last_login_time"    />
+        <result property="lastLoginIp"    column="last_login_ip"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="status"    column="status"    />
+        <result property="pId"    column="p_id"    />
+        <result property="type"    column="type"    />
+        <result property="departmentId"    column="department_id"    />
+        <result property="rank"    column="rank"    />
+        <result property="qrid"    column="qrid"    />
+        <result property="openid"    column="openid"    />
+        <result property="moneyBalance"    column="money_balance"    />
+        <result property="moneyLock"    column="money_lock"    />
+        <result property="recommentCode"    column="recomment_code"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectVrHisMemberVo">
+        select uid, user_name, password, last_login_time, last_login_ip, create_time, status, p_id, type, department_id, rank, qrid, openid, money_balance, money_lock, recomment_code, update_time from vr_his_member
+    </sql>
+
+    <select id="selectVrHisMemberList" parameterType="VrHisMember" resultMap="VrHisMemberResult">
+        <include refid="selectVrHisMemberVo"/>
+        <where>  
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="password != null  and password != ''"> and password = #{password}</if>
+            <if test="lastLoginTime != null "> and last_login_time = #{lastLoginTime}</if>
+            <if test="lastLoginIp != null "> and last_login_ip = #{lastLoginIp}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="pId != null "> and p_id = #{pId}</if>
+            <if test="type != null "> and type = #{type}</if>
+            <if test="departmentId != null "> and department_id = #{departmentId}</if>
+            <if test="rank != null "> and rank = #{rank}</if>
+            <if test="qrid != null "> and qrid = #{qrid}</if>
+            <if test="openid != null  and openid != ''"> and openid = #{openid}</if>
+            <if test="moneyBalance != null "> and money_balance = #{moneyBalance}</if>
+            <if test="moneyLock != null "> and money_lock = #{moneyLock}</if>
+            <if test="recommentCode != null  and recommentCode != ''"> and recomment_code = #{recommentCode}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisMemberByUid" parameterType="Long" resultMap="VrHisMemberResult">
+        <include refid="selectVrHisMemberVo"/>
+        where uid = #{uid}
+    </select>
+        
+    <insert id="insertVrHisMember" parameterType="VrHisMember" useGeneratedKeys="true" keyProperty="uid">
+        insert into vr_his_member
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userName != null">user_name,</if>
+            <if test="password != null">password,</if>
+            <if test="lastLoginTime != null">last_login_time,</if>
+            <if test="lastLoginIp != null">last_login_ip,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="status != null">status,</if>
+            <if test="pId != null">p_id,</if>
+            <if test="type != null">type,</if>
+            <if test="departmentId != null">department_id,</if>
+            <if test="rank != null">rank,</if>
+            <if test="qrid != null">qrid,</if>
+            <if test="openid != null">openid,</if>
+            <if test="moneyBalance != null">money_balance,</if>
+            <if test="moneyLock != null">money_lock,</if>
+            <if test="recommentCode != null">recomment_code,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userName != null">#{userName},</if>
+            <if test="password != null">#{password},</if>
+            <if test="lastLoginTime != null">#{lastLoginTime},</if>
+            <if test="lastLoginIp != null">#{lastLoginIp},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="status != null">#{status},</if>
+            <if test="pId != null">#{pId},</if>
+            <if test="type != null">#{type},</if>
+            <if test="departmentId != null">#{departmentId},</if>
+            <if test="rank != null">#{rank},</if>
+            <if test="qrid != null">#{qrid},</if>
+            <if test="openid != null">#{openid},</if>
+            <if test="moneyBalance != null">#{moneyBalance},</if>
+            <if test="moneyLock != null">#{moneyLock},</if>
+            <if test="recommentCode != null">#{recommentCode},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisMember" parameterType="VrHisMember">
+        update vr_his_member
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="lastLoginTime != null">last_login_time = #{lastLoginTime},</if>
+            <if test="lastLoginIp != null">last_login_ip = #{lastLoginIp},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="pId != null">p_id = #{pId},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="departmentId != null">department_id = #{departmentId},</if>
+            <if test="rank != null">rank = #{rank},</if>
+            <if test="qrid != null">qrid = #{qrid},</if>
+            <if test="openid != null">openid = #{openid},</if>
+            <if test="moneyBalance != null">money_balance = #{moneyBalance},</if>
+            <if test="moneyLock != null">money_lock = #{moneyLock},</if>
+            <if test="recommentCode != null">recomment_code = #{recommentCode},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where uid = #{uid}
+    </update>
+
+    <delete id="deleteVrHisMemberByUid" parameterType="Long">
+        delete from vr_his_member where uid = #{uid}
+    </delete>
+
+    <delete id="deleteVrHisMemberByUids" parameterType="String">
+        delete from vr_his_member where uid in 
+        <foreach item="uid" collection="array" open="(" separator="," close=")">
+            #{uid}
+        </foreach>
+    </delete>
+</mapper>

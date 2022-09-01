@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.sales.mapper.VrHisCarePkgMapper">
+    
+    <resultMap type="VrHisCarePkg" id="VrHisCarePkgResult">
+        <result property="id"    column="id"    />
+        <result property="hospitalId"    column="hospital_id"    />
+        <result property="doctorId"    column="doctor_id"    />
+        <result property="patientId"    column="patient_id"    />
+        <result property="careHistoryId"    column="care_history_id"    />
+        <result property="registrationId"    column="registration_id"    />
+        <result property="orderCode"    column="order_code"    />
+        <result property="amount"    column="amount"    />
+        <result property="olPayPart"    column="ol_pay_part"    />
+        <result property="typeId"    column="type_id"    />
+        <result property="status"    column="status"    />
+        <result property="addtime"    column="addtime"    />
+        <result property="opPlace"    column="op_place"    />
+    </resultMap>
+
+    <sql id="selectVrHisCarePkgVo">
+        select id, hospital_id, doctor_id, patient_id, care_history_id, registration_id, order_code, amount, ol_pay_part, type_id, status, addtime, op_place from vr_his_care_pkg
+    </sql>
+
+    <select id="selectVrHisCarePkgList" parameterType="VrHisCarePkg" resultMap="VrHisCarePkgResult">
+        <include refid="selectVrHisCarePkgVo"/>
+        <where>  
+            <if test="hospitalId != null "> and hospital_id = #{hospitalId}</if>
+            <if test="doctorId != null "> and doctor_id = #{doctorId}</if>
+            <if test="patientId != null "> and patient_id = #{patientId}</if>
+            <if test="careHistoryId != null "> and care_history_id = #{careHistoryId}</if>
+            <if test="registrationId != null "> and registration_id = #{registrationId}</if>
+            <if test="orderCode != null  and orderCode != ''"> and order_code = #{orderCode}</if>
+            <if test="amount != null "> and amount = #{amount}</if>
+            <if test="olPayPart != null "> and ol_pay_part = #{olPayPart}</if>
+            <if test="typeId != null "> and type_id = #{typeId}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="addtime != null "> and addtime = #{addtime}</if>
+            <if test="opPlace != null "> and op_place = #{opPlace}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisCarePkgById" parameterType="Integer" resultMap="VrHisCarePkgResult">
+        <include refid="selectVrHisCarePkgVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertVrHisCarePkg" parameterType="VrHisCarePkg" useGeneratedKeys="true" keyProperty="id">
+        insert into vr_his_care_pkg
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="hospitalId != null">hospital_id,</if>
+            <if test="doctorId != null">doctor_id,</if>
+            <if test="patientId != null">patient_id,</if>
+            <if test="careHistoryId != null">care_history_id,</if>
+            <if test="registrationId != null">registration_id,</if>
+            <if test="orderCode != null">order_code,</if>
+            <if test="amount != null">amount,</if>
+            <if test="olPayPart != null">ol_pay_part,</if>
+            <if test="typeId != null">type_id,</if>
+            <if test="status != null">status,</if>
+            <if test="addtime != null">addtime,</if>
+            <if test="opPlace != null">op_place,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="hospitalId != null">#{hospitalId},</if>
+            <if test="doctorId != null">#{doctorId},</if>
+            <if test="patientId != null">#{patientId},</if>
+            <if test="careHistoryId != null">#{careHistoryId},</if>
+            <if test="registrationId != null">#{registrationId},</if>
+            <if test="orderCode != null">#{orderCode},</if>
+            <if test="amount != null">#{amount},</if>
+            <if test="olPayPart != null">#{olPayPart},</if>
+            <if test="typeId != null">#{typeId},</if>
+            <if test="status != null">#{status},</if>
+            <if test="addtime != null">#{addtime},</if>
+            <if test="opPlace != null">#{opPlace},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisCarePkg" parameterType="VrHisCarePkg">
+        update vr_his_care_pkg
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="hospitalId != null">hospital_id = #{hospitalId},</if>
+            <if test="doctorId != null">doctor_id = #{doctorId},</if>
+            <if test="patientId != null">patient_id = #{patientId},</if>
+            <if test="careHistoryId != null">care_history_id = #{careHistoryId},</if>
+            <if test="registrationId != null">registration_id = #{registrationId},</if>
+            <if test="orderCode != null">order_code = #{orderCode},</if>
+            <if test="amount != null">amount = #{amount},</if>
+            <if test="olPayPart != null">ol_pay_part = #{olPayPart},</if>
+            <if test="typeId != null">type_id = #{typeId},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="addtime != null">addtime = #{addtime},</if>
+            <if test="opPlace != null">op_place = #{opPlace},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteVrHisCarePkgById" parameterType="Integer">
+        delete from vr_his_care_pkg where id = #{id}
+    </delete>
+
+    <delete id="deleteVrHisCarePkgByIds" parameterType="String">
+        delete from vr_his_care_pkg where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

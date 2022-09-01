@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.xsystem.mapper.VrHisSchedulingWeekMapper">
+    
+    <resultMap type="VrHisSchedulingWeek" id="VrHisSchedulingWeekResult">
+        <result property="schedulingWeekId"    column="scheduling_week_id"    />
+        <result property="date"    column="date"    />
+        <result property="week"    column="week"    />
+        <result property="registeredfeeId"    column="registeredfee_id"    />
+        <result property="schedulingSubsectionId"    column="scheduling_subsection_id"    />
+    </resultMap>
+
+    <sql id="selectVrHisSchedulingWeekVo">
+        select scheduling_week_id, date, week, registeredfee_id, scheduling_subsection_id from vr_his_scheduling_week
+    </sql>
+
+    <select id="selectVrHisSchedulingWeekList" parameterType="VrHisSchedulingWeek" resultMap="VrHisSchedulingWeekResult">
+        <include refid="selectVrHisSchedulingWeekVo"/>
+        <where>  
+            <if test="date != null  and date != ''"> and date = #{date}</if>
+            <if test="week != null "> and week = #{week}</if>
+            <if test="registeredfeeId != null "> and registeredfee_id = #{registeredfeeId}</if>
+            <if test="schedulingSubsectionId != null "> and scheduling_subsection_id = #{schedulingSubsectionId}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisSchedulingWeekBySchedulingWeekId" parameterType="Integer" resultMap="VrHisSchedulingWeekResult">
+        <include refid="selectVrHisSchedulingWeekVo"/>
+        where scheduling_week_id = #{schedulingWeekId}
+    </select>
+        
+    <insert id="insertVrHisSchedulingWeek" parameterType="VrHisSchedulingWeek" useGeneratedKeys="true" keyProperty="schedulingWeekId">
+        insert into vr_his_scheduling_week
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="date != null and date != ''">date,</if>
+            <if test="week != null">week,</if>
+            <if test="registeredfeeId != null">registeredfee_id,</if>
+            <if test="schedulingSubsectionId != null">scheduling_subsection_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="date != null and date != ''">#{date},</if>
+            <if test="week != null">#{week},</if>
+            <if test="registeredfeeId != null">#{registeredfeeId},</if>
+            <if test="schedulingSubsectionId != null">#{schedulingSubsectionId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisSchedulingWeek" parameterType="VrHisSchedulingWeek">
+        update vr_his_scheduling_week
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="date != null and date != ''">date = #{date},</if>
+            <if test="week != null">week = #{week},</if>
+            <if test="registeredfeeId != null">registeredfee_id = #{registeredfeeId},</if>
+            <if test="schedulingSubsectionId != null">scheduling_subsection_id = #{schedulingSubsectionId},</if>
+        </trim>
+        where scheduling_week_id = #{schedulingWeekId}
+    </update>
+
+    <delete id="deleteVrHisSchedulingWeekBySchedulingWeekId" parameterType="Integer">
+        delete from vr_his_scheduling_week where scheduling_week_id = #{schedulingWeekId}
+    </delete>
+
+    <delete id="deleteVrHisSchedulingWeekBySchedulingWeekIds" parameterType="String">
+        delete from vr_his_scheduling_week where scheduling_week_id in 
+        <foreach item="schedulingWeekId" collection="array" open="(" separator="," close=")">
+            #{schedulingWeekId}
+        </foreach>
+    </delete>
+</mapper>

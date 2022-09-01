@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.medicine.mapper.VrHisInventoryMapper">
+    
+    <resultMap type="VrHisInventory" id="VrHisInventoryResult">
+        <result property="inventoryId"    column="inventory_id"    />
+        <result property="hmrId"    column="hmr_id"    />
+        <result property="companyId"    column="company_id"    />
+        <result property="inventoryNum"    column="inventory_num"    />
+        <result property="inventoryUnit"    column="inventory_unit"    />
+        <result property="inventoryTradePrice"    column="inventory_trade_price"    />
+        <result property="inventoryPrescriptionPrice"    column="inventory_prescription_price"    />
+        <result property="inventoryTradeTotalAmount"    column="inventory_trade_total_amount"    />
+        <result property="inventoryPrescriptionTotalAmount"    column="inventory_prescription_total_amount"    />
+        <result property="earlyWarning"    column="early_warning"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectVrHisInventoryVo">
+        select inventory_id, hmr_id, company_id, inventory_num, inventory_unit, inventory_trade_price, inventory_prescription_price, inventory_trade_total_amount, inventory_prescription_total_amount, early_warning, update_time from vr_his_inventory
+    </sql>
+
+    <select id="selectVrHisInventoryList" parameterType="VrHisInventory" resultMap="VrHisInventoryResult">
+        <include refid="selectVrHisInventoryVo"/>
+        <where>  
+            <if test="hmrId != null "> and hmr_id = #{hmrId}</if>
+            <if test="companyId != null "> and company_id = #{companyId}</if>
+            <if test="inventoryNum != null "> and inventory_num = #{inventoryNum}</if>
+            <if test="inventoryUnit != null  and inventoryUnit != ''"> and inventory_unit = #{inventoryUnit}</if>
+            <if test="inventoryTradePrice != null "> and inventory_trade_price = #{inventoryTradePrice}</if>
+            <if test="inventoryPrescriptionPrice != null "> and inventory_prescription_price = #{inventoryPrescriptionPrice}</if>
+            <if test="inventoryTradeTotalAmount != null "> and inventory_trade_total_amount = #{inventoryTradeTotalAmount}</if>
+            <if test="inventoryPrescriptionTotalAmount != null "> and inventory_prescription_total_amount = #{inventoryPrescriptionTotalAmount}</if>
+            <if test="earlyWarning != null  and earlyWarning != ''"> and early_warning = #{earlyWarning}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisInventoryByInventoryId" parameterType="Integer" resultMap="VrHisInventoryResult">
+        <include refid="selectVrHisInventoryVo"/>
+        where inventory_id = #{inventoryId}
+    </select>
+        
+    <insert id="insertVrHisInventory" parameterType="VrHisInventory" useGeneratedKeys="true" keyProperty="inventoryId">
+        insert into vr_his_inventory
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="hmrId != null">hmr_id,</if>
+            <if test="companyId != null">company_id,</if>
+            <if test="inventoryNum != null">inventory_num,</if>
+            <if test="inventoryUnit != null and inventoryUnit != ''">inventory_unit,</if>
+            <if test="inventoryTradePrice != null">inventory_trade_price,</if>
+            <if test="inventoryPrescriptionPrice != null">inventory_prescription_price,</if>
+            <if test="inventoryTradeTotalAmount != null">inventory_trade_total_amount,</if>
+            <if test="inventoryPrescriptionTotalAmount != null">inventory_prescription_total_amount,</if>
+            <if test="earlyWarning != null and earlyWarning != ''">early_warning,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="hmrId != null">#{hmrId},</if>
+            <if test="companyId != null">#{companyId},</if>
+            <if test="inventoryNum != null">#{inventoryNum},</if>
+            <if test="inventoryUnit != null and inventoryUnit != ''">#{inventoryUnit},</if>
+            <if test="inventoryTradePrice != null">#{inventoryTradePrice},</if>
+            <if test="inventoryPrescriptionPrice != null">#{inventoryPrescriptionPrice},</if>
+            <if test="inventoryTradeTotalAmount != null">#{inventoryTradeTotalAmount},</if>
+            <if test="inventoryPrescriptionTotalAmount != null">#{inventoryPrescriptionTotalAmount},</if>
+            <if test="earlyWarning != null and earlyWarning != ''">#{earlyWarning},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisInventory" parameterType="VrHisInventory">
+        update vr_his_inventory
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="hmrId != null">hmr_id = #{hmrId},</if>
+            <if test="companyId != null">company_id = #{companyId},</if>
+            <if test="inventoryNum != null">inventory_num = #{inventoryNum},</if>
+            <if test="inventoryUnit != null and inventoryUnit != ''">inventory_unit = #{inventoryUnit},</if>
+            <if test="inventoryTradePrice != null">inventory_trade_price = #{inventoryTradePrice},</if>
+            <if test="inventoryPrescriptionPrice != null">inventory_prescription_price = #{inventoryPrescriptionPrice},</if>
+            <if test="inventoryTradeTotalAmount != null">inventory_trade_total_amount = #{inventoryTradeTotalAmount},</if>
+            <if test="inventoryPrescriptionTotalAmount != null">inventory_prescription_total_amount = #{inventoryPrescriptionTotalAmount},</if>
+            <if test="earlyWarning != null and earlyWarning != ''">early_warning = #{earlyWarning},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where inventory_id = #{inventoryId}
+    </update>
+
+    <delete id="deleteVrHisInventoryByInventoryId" parameterType="Integer">
+        delete from vr_his_inventory where inventory_id = #{inventoryId}
+    </delete>
+
+    <delete id="deleteVrHisInventoryByInventoryIds" parameterType="String">
+        delete from vr_his_inventory where inventory_id in 
+        <foreach item="inventoryId" collection="array" open="(" separator="," close=")">
+            #{inventoryId}
+        </foreach>
+    </delete>
+</mapper>

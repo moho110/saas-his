@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.department.mapper.VrHisHospitalMapper">
+    
+    <resultMap type="VrHisHospital" id="VrHisHospitalResult">
+        <result property="id"    column="id"    />
+        <result property="hospitalName"    column="hospital_name"    />
+        <result property="picture"    column="picture"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="hospitalNumber"    column="hospital_number"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="hid"    column="hid"    />
+        <result property="address"    column="address"    />
+        <result property="ownerName"    column="owner_name"    />
+        <result property="ownerMobile"    column="owner_mobile"    />
+        <result property="ownerPost"    column="owner_post"    />
+        <result property="majorField"    column="major_field"    />
+        <result property="introduction"    column="introduction"    />
+    </resultMap>
+
+    <sql id="selectVrHisHospitalVo">
+        select id, hospital_name, picture, create_time, hospital_number, update_time, hid, address, owner_name, owner_mobile, owner_post, major_field, introduction from vr_his_hospital
+    </sql>
+
+    <select id="selectVrHisHospitalList" parameterType="VrHisHospital" resultMap="VrHisHospitalResult">
+        <include refid="selectVrHisHospitalVo"/>
+        <where>  
+            <if test="hospitalName != null  and hospitalName != ''"> and hospital_name like concat('%', #{hospitalName}, '%')</if>
+            <if test="picture != null  and picture != ''"> and picture = #{picture}</if>
+            <if test="hospitalNumber != null  and hospitalNumber != ''"> and hospital_number = #{hospitalNumber}</if>
+            <if test="hid != null "> and hid = #{hid}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="ownerName != null  and ownerName != ''"> and owner_name like concat('%', #{ownerName}, '%')</if>
+            <if test="ownerMobile != null  and ownerMobile != ''"> and owner_mobile = #{ownerMobile}</if>
+            <if test="ownerPost != null  and ownerPost != ''"> and owner_post = #{ownerPost}</if>
+            <if test="majorField != null  and majorField != ''"> and major_field = #{majorField}</if>
+            <if test="introduction != null  and introduction != ''"> and introduction = #{introduction}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisHospitalById" parameterType="Long" resultMap="VrHisHospitalResult">
+        <include refid="selectVrHisHospitalVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertVrHisHospital" parameterType="VrHisHospital" useGeneratedKeys="true" keyProperty="id">
+        insert into vr_his_hospital
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="hospitalName != null and hospitalName != ''">hospital_name,</if>
+            <if test="picture != null">picture,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="hospitalNumber != null and hospitalNumber != ''">hospital_number,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="hid != null">hid,</if>
+            <if test="address != null and address != ''">address,</if>
+            <if test="ownerName != null and ownerName != ''">owner_name,</if>
+            <if test="ownerMobile != null and ownerMobile != ''">owner_mobile,</if>
+            <if test="ownerPost != null and ownerPost != ''">owner_post,</if>
+            <if test="majorField != null and majorField != ''">major_field,</if>
+            <if test="introduction != null and introduction != ''">introduction,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="hospitalName != null and hospitalName != ''">#{hospitalName},</if>
+            <if test="picture != null">#{picture},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="hospitalNumber != null and hospitalNumber != ''">#{hospitalNumber},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="hid != null">#{hid},</if>
+            <if test="address != null and address != ''">#{address},</if>
+            <if test="ownerName != null and ownerName != ''">#{ownerName},</if>
+            <if test="ownerMobile != null and ownerMobile != ''">#{ownerMobile},</if>
+            <if test="ownerPost != null and ownerPost != ''">#{ownerPost},</if>
+            <if test="majorField != null and majorField != ''">#{majorField},</if>
+            <if test="introduction != null and introduction != ''">#{introduction},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisHospital" parameterType="VrHisHospital">
+        update vr_his_hospital
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="hospitalName != null and hospitalName != ''">hospital_name = #{hospitalName},</if>
+            <if test="picture != null">picture = #{picture},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="hospitalNumber != null and hospitalNumber != ''">hospital_number = #{hospitalNumber},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="hid != null">hid = #{hid},</if>
+            <if test="address != null and address != ''">address = #{address},</if>
+            <if test="ownerName != null and ownerName != ''">owner_name = #{ownerName},</if>
+            <if test="ownerMobile != null and ownerMobile != ''">owner_mobile = #{ownerMobile},</if>
+            <if test="ownerPost != null and ownerPost != ''">owner_post = #{ownerPost},</if>
+            <if test="majorField != null and majorField != ''">major_field = #{majorField},</if>
+            <if test="introduction != null and introduction != ''">introduction = #{introduction},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteVrHisHospitalById" parameterType="Long">
+        delete from vr_his_hospital where id = #{id}
+    </delete>
+
+    <delete id="deleteVrHisHospitalByIds" parameterType="String">
+        delete from vr_his_hospital where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

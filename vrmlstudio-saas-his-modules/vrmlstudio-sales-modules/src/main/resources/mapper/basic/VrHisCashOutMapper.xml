@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.sales.mapper.VrHisCashOutMapper">
+    
+    <resultMap type="VrHisCashOut" id="VrHisCashOutResult">
+        <result property="id"    column="id"    />
+        <result property="hospitalId"    column="hospital_id"    />
+        <result property="appid"    column="appid"    />
+        <result property="userId"    column="user_id"    />
+        <result property="openid"    column="openid"    />
+        <result property="amount"    column="amount"    />
+        <result property="addtime"    column="addtime"    />
+        <result property="status"    column="status"    />
+        <result property="ip"    column="ip"    />
+        <result property="typeId"    column="type_id"    />
+        <result property="typeFix"    column="type_fix"    />
+        <result property="admUid"    column="adm_uid"    />
+        <result property="admIp"    column="adm_ip"    />
+        <result property="admMemo"    column="adm_memo"    />
+        <result property="admTime"    column="adm_time"    />
+    </resultMap>
+
+    <sql id="selectVrHisCashOutVo">
+        select id, hospital_id, appid, user_id, openid, amount, addtime, status, ip, type_id, type_fix, adm_uid, adm_ip, adm_memo, adm_time from vr_his_cash_out
+    </sql>
+
+    <select id="selectVrHisCashOutList" parameterType="VrHisCashOut" resultMap="VrHisCashOutResult">
+        <include refid="selectVrHisCashOutVo"/>
+        <where>  
+            <if test="hospitalId != null "> and hospital_id = #{hospitalId}</if>
+            <if test="appid != null  and appid != ''"> and appid = #{appid}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="openid != null  and openid != ''"> and openid = #{openid}</if>
+            <if test="amount != null "> and amount = #{amount}</if>
+            <if test="addtime != null "> and addtime = #{addtime}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="ip != null  and ip != ''"> and ip = #{ip}</if>
+            <if test="typeId != null "> and type_id = #{typeId}</if>
+            <if test="typeFix != null  and typeFix != ''"> and type_fix = #{typeFix}</if>
+            <if test="admUid != null "> and adm_uid = #{admUid}</if>
+            <if test="admIp != null  and admIp != ''"> and adm_ip = #{admIp}</if>
+            <if test="admMemo != null  and admMemo != ''"> and adm_memo = #{admMemo}</if>
+            <if test="admTime != null "> and adm_time = #{admTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisCashOutById" parameterType="Integer" resultMap="VrHisCashOutResult">
+        <include refid="selectVrHisCashOutVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertVrHisCashOut" parameterType="VrHisCashOut" useGeneratedKeys="true" keyProperty="id">
+        insert into vr_his_cash_out
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="hospitalId != null">hospital_id,</if>
+            <if test="appid != null">appid,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="openid != null">openid,</if>
+            <if test="amount != null">amount,</if>
+            <if test="addtime != null">addtime,</if>
+            <if test="status != null">status,</if>
+            <if test="ip != null">ip,</if>
+            <if test="typeId != null">type_id,</if>
+            <if test="typeFix != null">type_fix,</if>
+            <if test="admUid != null">adm_uid,</if>
+            <if test="admIp != null">adm_ip,</if>
+            <if test="admMemo != null">adm_memo,</if>
+            <if test="admTime != null">adm_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="hospitalId != null">#{hospitalId},</if>
+            <if test="appid != null">#{appid},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="openid != null">#{openid},</if>
+            <if test="amount != null">#{amount},</if>
+            <if test="addtime != null">#{addtime},</if>
+            <if test="status != null">#{status},</if>
+            <if test="ip != null">#{ip},</if>
+            <if test="typeId != null">#{typeId},</if>
+            <if test="typeFix != null">#{typeFix},</if>
+            <if test="admUid != null">#{admUid},</if>
+            <if test="admIp != null">#{admIp},</if>
+            <if test="admMemo != null">#{admMemo},</if>
+            <if test="admTime != null">#{admTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisCashOut" parameterType="VrHisCashOut">
+        update vr_his_cash_out
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="hospitalId != null">hospital_id = #{hospitalId},</if>
+            <if test="appid != null">appid = #{appid},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="openid != null">openid = #{openid},</if>
+            <if test="amount != null">amount = #{amount},</if>
+            <if test="addtime != null">addtime = #{addtime},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="ip != null">ip = #{ip},</if>
+            <if test="typeId != null">type_id = #{typeId},</if>
+            <if test="typeFix != null">type_fix = #{typeFix},</if>
+            <if test="admUid != null">adm_uid = #{admUid},</if>
+            <if test="admIp != null">adm_ip = #{admIp},</if>
+            <if test="admMemo != null">adm_memo = #{admMemo},</if>
+            <if test="admTime != null">adm_time = #{admTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteVrHisCashOutById" parameterType="Integer">
+        delete from vr_his_cash_out where id = #{id}
+    </delete>
+
+    <delete id="deleteVrHisCashOutByIds" parameterType="String">
+        delete from vr_his_cash_out where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

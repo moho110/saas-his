@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.xsystem.mapper.VrHisDepartmentMapper">
+    
+    <resultMap type="VrHisDepartment" id="VrHisDepartmentResult">
+        <result property="did"    column="did"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="departmentName"    column="department_name"    />
+        <result property="departmentNumber"    column="department_number"    />
+        <result property="hid"    column="hid"    />
+    </resultMap>
+
+    <sql id="selectVrHisDepartmentVo">
+        select did, create_time, update_time, department_name, department_number, hid from vr_his_department
+    </sql>
+
+    <select id="selectVrHisDepartmentList" parameterType="VrHisDepartment" resultMap="VrHisDepartmentResult">
+        <include refid="selectVrHisDepartmentVo"/>
+        <where>  
+            <if test="departmentName != null  and departmentName != ''"> and department_name like concat('%', #{departmentName}, '%')</if>
+            <if test="departmentNumber != null  and departmentNumber != ''"> and department_number = #{departmentNumber}</if>
+            <if test="hid != null "> and hid = #{hid}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisDepartmentByDid" parameterType="Long" resultMap="VrHisDepartmentResult">
+        <include refid="selectVrHisDepartmentVo"/>
+        where did = #{did}
+    </select>
+        
+    <insert id="insertVrHisDepartment" parameterType="VrHisDepartment" useGeneratedKeys="true" keyProperty="did">
+        insert into vr_his_department
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="departmentName != null and departmentName != ''">department_name,</if>
+            <if test="departmentNumber != null and departmentNumber != ''">department_number,</if>
+            <if test="hid != null">hid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="departmentName != null and departmentName != ''">#{departmentName},</if>
+            <if test="departmentNumber != null and departmentNumber != ''">#{departmentNumber},</if>
+            <if test="hid != null">#{hid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisDepartment" parameterType="VrHisDepartment">
+        update vr_his_department
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="departmentName != null and departmentName != ''">department_name = #{departmentName},</if>
+            <if test="departmentNumber != null and departmentNumber != ''">department_number = #{departmentNumber},</if>
+            <if test="hid != null">hid = #{hid},</if>
+        </trim>
+        where did = #{did}
+    </update>
+
+    <delete id="deleteVrHisDepartmentByDid" parameterType="Long">
+        delete from vr_his_department where did = #{did}
+    </delete>
+
+    <delete id="deleteVrHisDepartmentByDids" parameterType="String">
+        delete from vr_his_department where did in 
+        <foreach item="did" collection="array" open="(" separator="," close=")">
+            #{did}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.sales.mapper.VrHisPurchaseMapper">
+    
+    <resultMap type="VrHisPurchase" id="VrHisPurchaseResult">
+        <result property="purchaseId"    column="purchase_id"    />
+        <result property="medicinesId"    column="medicines_id"    />
+        <result property="batchesOfInventoryId"    column="batches_of_inventory_id"    />
+        <result property="purchaseNum"    column="purchase_num"    />
+        <result property="purchaseUnit"    column="purchase_unit"    />
+        <result property="purchaseTradePrice"    column="purchase_trade_price"    />
+        <result property="purchasePrescriptionPrice"    column="purchase_prescription_price"    />
+        <result property="purchaseTradeTotalAmount"    column="purchase_trade_total_amount"    />
+        <result property="purchasePrescriptionTotalAmount"    column="purchase_prescription_total_amount"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="hmrId"    column="hmr_id"    />
+    </resultMap>
+
+    <sql id="selectVrHisPurchaseVo">
+        select purchase_id, medicines_id, batches_of_inventory_id, purchase_num, purchase_unit, purchase_trade_price, purchase_prescription_price, purchase_trade_total_amount, purchase_prescription_total_amount, create_time, hmr_id from vr_his_purchase
+    </sql>
+
+    <select id="selectVrHisPurchaseList" parameterType="VrHisPurchase" resultMap="VrHisPurchaseResult">
+        <include refid="selectVrHisPurchaseVo"/>
+        <where>  
+            <if test="medicinesId != null "> and medicines_id = #{medicinesId}</if>
+            <if test="batchesOfInventoryId != null "> and batches_of_inventory_id = #{batchesOfInventoryId}</if>
+            <if test="purchaseNum != null "> and purchase_num = #{purchaseNum}</if>
+            <if test="purchaseUnit != null  and purchaseUnit != ''"> and purchase_unit = #{purchaseUnit}</if>
+            <if test="purchaseTradePrice != null "> and purchase_trade_price = #{purchaseTradePrice}</if>
+            <if test="purchasePrescriptionPrice != null "> and purchase_prescription_price = #{purchasePrescriptionPrice}</if>
+            <if test="purchaseTradeTotalAmount != null "> and purchase_trade_total_amount = #{purchaseTradeTotalAmount}</if>
+            <if test="purchasePrescriptionTotalAmount != null "> and purchase_prescription_total_amount = #{purchasePrescriptionTotalAmount}</if>
+            <if test="hmrId != null "> and hmr_id = #{hmrId}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisPurchaseByPurchaseId" parameterType="Integer" resultMap="VrHisPurchaseResult">
+        <include refid="selectVrHisPurchaseVo"/>
+        where purchase_id = #{purchaseId}
+    </select>
+        
+    <insert id="insertVrHisPurchase" parameterType="VrHisPurchase" useGeneratedKeys="true" keyProperty="purchaseId">
+        insert into vr_his_purchase
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="medicinesId != null">medicines_id,</if>
+            <if test="batchesOfInventoryId != null">batches_of_inventory_id,</if>
+            <if test="purchaseNum != null">purchase_num,</if>
+            <if test="purchaseUnit != null and purchaseUnit != ''">purchase_unit,</if>
+            <if test="purchaseTradePrice != null">purchase_trade_price,</if>
+            <if test="purchasePrescriptionPrice != null">purchase_prescription_price,</if>
+            <if test="purchaseTradeTotalAmount != null">purchase_trade_total_amount,</if>
+            <if test="purchasePrescriptionTotalAmount != null">purchase_prescription_total_amount,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="hmrId != null">hmr_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="medicinesId != null">#{medicinesId},</if>
+            <if test="batchesOfInventoryId != null">#{batchesOfInventoryId},</if>
+            <if test="purchaseNum != null">#{purchaseNum},</if>
+            <if test="purchaseUnit != null and purchaseUnit != ''">#{purchaseUnit},</if>
+            <if test="purchaseTradePrice != null">#{purchaseTradePrice},</if>
+            <if test="purchasePrescriptionPrice != null">#{purchasePrescriptionPrice},</if>
+            <if test="purchaseTradeTotalAmount != null">#{purchaseTradeTotalAmount},</if>
+            <if test="purchasePrescriptionTotalAmount != null">#{purchasePrescriptionTotalAmount},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="hmrId != null">#{hmrId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisPurchase" parameterType="VrHisPurchase">
+        update vr_his_purchase
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="medicinesId != null">medicines_id = #{medicinesId},</if>
+            <if test="batchesOfInventoryId != null">batches_of_inventory_id = #{batchesOfInventoryId},</if>
+            <if test="purchaseNum != null">purchase_num = #{purchaseNum},</if>
+            <if test="purchaseUnit != null and purchaseUnit != ''">purchase_unit = #{purchaseUnit},</if>
+            <if test="purchaseTradePrice != null">purchase_trade_price = #{purchaseTradePrice},</if>
+            <if test="purchasePrescriptionPrice != null">purchase_prescription_price = #{purchasePrescriptionPrice},</if>
+            <if test="purchaseTradeTotalAmount != null">purchase_trade_total_amount = #{purchaseTradeTotalAmount},</if>
+            <if test="purchasePrescriptionTotalAmount != null">purchase_prescription_total_amount = #{purchasePrescriptionTotalAmount},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="hmrId != null">hmr_id = #{hmrId},</if>
+        </trim>
+        where purchase_id = #{purchaseId}
+    </update>
+
+    <delete id="deleteVrHisPurchaseByPurchaseId" parameterType="Integer">
+        delete from vr_his_purchase where purchase_id = #{purchaseId}
+    </delete>
+
+    <delete id="deleteVrHisPurchaseByPurchaseIds" parameterType="String">
+        delete from vr_his_purchase where purchase_id in 
+        <foreach item="purchaseId" collection="array" open="(" separator="," close=")">
+            #{purchaseId}
+        </foreach>
+    </delete>
+</mapper>

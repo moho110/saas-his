@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.sales.mapper.VrHisMchpayMapper">
+    
+    <resultMap type="VrHisMchpay" id="VrHisMchpayResult">
+        <result property="id"    column="id"    />
+        <result property="hospitalId"    column="hospital_id"    />
+        <result property="cashOutId"    column="cash_out_id"    />
+        <result property="ip"    column="ip"    />
+        <result property="partnerTradeNo"    column="partner_trade_no"    />
+        <result property="paymentNo"    column="payment_no"    />
+        <result property="addtime"    column="addtime"    />
+        <result property="status"    column="status"    />
+        <result property="memo"    column="memo"    />
+    </resultMap>
+
+    <sql id="selectVrHisMchpayVo">
+        select id, hospital_id, cash_out_id, ip, partner_trade_no, payment_no, addtime, status, memo from vr_his_mchpay
+    </sql>
+
+    <select id="selectVrHisMchpayList" parameterType="VrHisMchpay" resultMap="VrHisMchpayResult">
+        <include refid="selectVrHisMchpayVo"/>
+        <where>  
+            <if test="hospitalId != null "> and hospital_id = #{hospitalId}</if>
+            <if test="cashOutId != null "> and cash_out_id = #{cashOutId}</if>
+            <if test="ip != null  and ip != ''"> and ip = #{ip}</if>
+            <if test="partnerTradeNo != null  and partnerTradeNo != ''"> and partner_trade_no = #{partnerTradeNo}</if>
+            <if test="paymentNo != null  and paymentNo != ''"> and payment_no = #{paymentNo}</if>
+            <if test="addtime != null "> and addtime = #{addtime}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisMchpayById" parameterType="Integer" resultMap="VrHisMchpayResult">
+        <include refid="selectVrHisMchpayVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertVrHisMchpay" parameterType="VrHisMchpay" useGeneratedKeys="true" keyProperty="id">
+        insert into vr_his_mchpay
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="hospitalId != null">hospital_id,</if>
+            <if test="cashOutId != null">cash_out_id,</if>
+            <if test="ip != null">ip,</if>
+            <if test="partnerTradeNo != null">partner_trade_no,</if>
+            <if test="paymentNo != null">payment_no,</if>
+            <if test="addtime != null">addtime,</if>
+            <if test="status != null">status,</if>
+            <if test="memo != null">memo,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="hospitalId != null">#{hospitalId},</if>
+            <if test="cashOutId != null">#{cashOutId},</if>
+            <if test="ip != null">#{ip},</if>
+            <if test="partnerTradeNo != null">#{partnerTradeNo},</if>
+            <if test="paymentNo != null">#{paymentNo},</if>
+            <if test="addtime != null">#{addtime},</if>
+            <if test="status != null">#{status},</if>
+            <if test="memo != null">#{memo},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisMchpay" parameterType="VrHisMchpay">
+        update vr_his_mchpay
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="hospitalId != null">hospital_id = #{hospitalId},</if>
+            <if test="cashOutId != null">cash_out_id = #{cashOutId},</if>
+            <if test="ip != null">ip = #{ip},</if>
+            <if test="partnerTradeNo != null">partner_trade_no = #{partnerTradeNo},</if>
+            <if test="paymentNo != null">payment_no = #{paymentNo},</if>
+            <if test="addtime != null">addtime = #{addtime},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="memo != null">memo = #{memo},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteVrHisMchpayById" parameterType="Integer">
+        delete from vr_his_mchpay where id = #{id}
+    </delete>
+
+    <delete id="deleteVrHisMchpayByIds" parameterType="String">
+        delete from vr_his_mchpay where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

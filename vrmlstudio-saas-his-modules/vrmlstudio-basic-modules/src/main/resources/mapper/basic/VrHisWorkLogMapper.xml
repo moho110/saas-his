@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.department.mapper.VrHisWorkLogMapper">
+    
+    <resultMap type="VrHisWorkLog" id="VrHisWorkLogResult">
+        <result property="id"    column="id"    />
+        <result property="tabName"    column="tab_name"    />
+        <result property="relId"    column="rel_id"    />
+        <result property="title"    column="title"    />
+        <result property="addtime"    column="addtime"    />
+        <result property="session"    column="session"    />
+        <result property="cookie"    column="cookie"    />
+        <result property="ip"    column="ip"    />
+        <result property="devInfo"    column="dev_info"    />
+    </resultMap>
+
+    <sql id="selectVrHisWorkLogVo">
+        select id, tab_name, rel_id, title, addtime, session, cookie, ip, dev_info from vr_his_work_log
+    </sql>
+
+    <select id="selectVrHisWorkLogList" parameterType="VrHisWorkLog" resultMap="VrHisWorkLogResult">
+        <include refid="selectVrHisWorkLogVo"/>
+        <where>  
+            <if test="tabName != null  and tabName != ''"> and tab_name like concat('%', #{tabName}, '%')</if>
+            <if test="relId != null "> and rel_id = #{relId}</if>
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="addtime != null "> and addtime = #{addtime}</if>
+            <if test="session != null  and session != ''"> and session = #{session}</if>
+            <if test="cookie != null  and cookie != ''"> and cookie = #{cookie}</if>
+            <if test="ip != null  and ip != ''"> and ip = #{ip}</if>
+            <if test="devInfo != null  and devInfo != ''"> and dev_info = #{devInfo}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisWorkLogById" parameterType="Integer" resultMap="VrHisWorkLogResult">
+        <include refid="selectVrHisWorkLogVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertVrHisWorkLog" parameterType="VrHisWorkLog" useGeneratedKeys="true" keyProperty="id">
+        insert into vr_his_work_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tabName != null">tab_name,</if>
+            <if test="relId != null">rel_id,</if>
+            <if test="title != null">title,</if>
+            <if test="addtime != null">addtime,</if>
+            <if test="session != null">session,</if>
+            <if test="cookie != null">cookie,</if>
+            <if test="ip != null">ip,</if>
+            <if test="devInfo != null">dev_info,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tabName != null">#{tabName},</if>
+            <if test="relId != null">#{relId},</if>
+            <if test="title != null">#{title},</if>
+            <if test="addtime != null">#{addtime},</if>
+            <if test="session != null">#{session},</if>
+            <if test="cookie != null">#{cookie},</if>
+            <if test="ip != null">#{ip},</if>
+            <if test="devInfo != null">#{devInfo},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisWorkLog" parameterType="VrHisWorkLog">
+        update vr_his_work_log
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="tabName != null">tab_name = #{tabName},</if>
+            <if test="relId != null">rel_id = #{relId},</if>
+            <if test="title != null">title = #{title},</if>
+            <if test="addtime != null">addtime = #{addtime},</if>
+            <if test="session != null">session = #{session},</if>
+            <if test="cookie != null">cookie = #{cookie},</if>
+            <if test="ip != null">ip = #{ip},</if>
+            <if test="devInfo != null">dev_info = #{devInfo},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteVrHisWorkLogById" parameterType="Integer">
+        delete from vr_his_work_log where id = #{id}
+    </delete>
+
+    <delete id="deleteVrHisWorkLogByIds" parameterType="String">
+        delete from vr_his_work_log where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

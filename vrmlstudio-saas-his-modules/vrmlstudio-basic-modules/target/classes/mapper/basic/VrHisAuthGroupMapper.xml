@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.department.mapper.VrHisAuthGroupMapper">
+    
+    <resultMap type="VrHisAuthGroup" id="VrHisAuthGroupResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="status"    column="status"    />
+        <result property="isManage"    column="is_manage"    />
+        <result property="rules"    column="rules"    />
+    </resultMap>
+
+    <sql id="selectVrHisAuthGroupVo">
+        select id, title, status, is_manage, rules from vr_his_auth_group
+    </sql>
+
+    <select id="selectVrHisAuthGroupList" parameterType="VrHisAuthGroup" resultMap="VrHisAuthGroupResult">
+        <include refid="selectVrHisAuthGroupVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="isManage != null "> and is_manage = #{isManage}</if>
+            <if test="rules != null  and rules != ''"> and rules = #{rules}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisAuthGroupById" parameterType="Integer" resultMap="VrHisAuthGroupResult">
+        <include refid="selectVrHisAuthGroupVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertVrHisAuthGroup" parameterType="VrHisAuthGroup" useGeneratedKeys="true" keyProperty="id">
+        insert into vr_his_auth_group
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">title,</if>
+            <if test="status != null">status,</if>
+            <if test="isManage != null">is_manage,</if>
+            <if test="rules != null and rules != ''">rules,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="status != null">#{status},</if>
+            <if test="isManage != null">#{isManage},</if>
+            <if test="rules != null and rules != ''">#{rules},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisAuthGroup" parameterType="VrHisAuthGroup">
+        update vr_his_auth_group
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="isManage != null">is_manage = #{isManage},</if>
+            <if test="rules != null and rules != ''">rules = #{rules},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteVrHisAuthGroupById" parameterType="Integer">
+        delete from vr_his_auth_group where id = #{id}
+    </delete>
+
+    <delete id="deleteVrHisAuthGroupByIds" parameterType="String">
+        delete from vr_his_auth_group where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

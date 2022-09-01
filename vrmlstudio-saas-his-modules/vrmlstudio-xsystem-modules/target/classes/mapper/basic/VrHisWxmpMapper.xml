@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.xsystem.mapper.VrHisWxmpMapper">
+    
+    <resultMap type="VrHisWxmp" id="VrHisWxmpResult">
+        <result property="id"    column="id"    />
+        <result property="userid"    column="userid"    />
+        <result property="appid"    column="appid"    />
+        <result property="appsecret"    column="appsecret"    />
+        <result property="token"    column="token"    />
+        <result property="encodingaeskey"    column="encodingaeskey"    />
+        <result property="accessToken"    column="access_token"    />
+        <result property="accessTokenExpires"    column="access_token_expires"    />
+        <result property="jsapiTicket"    column="jsapi_ticket"    />
+        <result property="jsapiTicketExpires"    column="jsapi_ticket_expires"    />
+        <result property="mchid"    column="mchid"    />
+        <result property="mchkey"    column="mchkey"    />
+        <result property="sslCertPath"    column="ssl_cert_path"    />
+        <result property="appId"    column="app_id"    />
+        <result property="merchantPrivateKey"    column="merchant_private_key"    />
+        <result property="alipayPublicKey"    column="alipay_public_key"    />
+    </resultMap>
+
+    <sql id="selectVrHisWxmpVo">
+        select id, userid, appid, appsecret, token, encodingaeskey, access_token, access_token_expires, jsapi_ticket, jsapi_ticket_expires, mchid, mchkey, ssl_cert_path, app_id, merchant_private_key, alipay_public_key from vr_his_wxmp
+    </sql>
+
+    <select id="selectVrHisWxmpList" parameterType="VrHisWxmp" resultMap="VrHisWxmpResult">
+        <include refid="selectVrHisWxmpVo"/>
+        <where>  
+            <if test="userid != null "> and userid = #{userid}</if>
+            <if test="appid != null  and appid != ''"> and appid = #{appid}</if>
+            <if test="appsecret != null  and appsecret != ''"> and appsecret = #{appsecret}</if>
+            <if test="token != null  and token != ''"> and token = #{token}</if>
+            <if test="encodingaeskey != null  and encodingaeskey != ''"> and encodingaeskey = #{encodingaeskey}</if>
+            <if test="accessToken != null  and accessToken != ''"> and access_token = #{accessToken}</if>
+            <if test="accessTokenExpires != null "> and access_token_expires = #{accessTokenExpires}</if>
+            <if test="jsapiTicket != null  and jsapiTicket != ''"> and jsapi_ticket = #{jsapiTicket}</if>
+            <if test="jsapiTicketExpires != null "> and jsapi_ticket_expires = #{jsapiTicketExpires}</if>
+            <if test="mchid != null  and mchid != ''"> and mchid = #{mchid}</if>
+            <if test="mchkey != null  and mchkey != ''"> and mchkey = #{mchkey}</if>
+            <if test="sslCertPath != null  and sslCertPath != ''"> and ssl_cert_path = #{sslCertPath}</if>
+            <if test="appId != null  and appId != ''"> and app_id = #{appId}</if>
+            <if test="merchantPrivateKey != null  and merchantPrivateKey != ''"> and merchant_private_key = #{merchantPrivateKey}</if>
+            <if test="alipayPublicKey != null  and alipayPublicKey != ''"> and alipay_public_key = #{alipayPublicKey}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisWxmpById" parameterType="Integer" resultMap="VrHisWxmpResult">
+        <include refid="selectVrHisWxmpVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertVrHisWxmp" parameterType="VrHisWxmp" useGeneratedKeys="true" keyProperty="id">
+        insert into vr_his_wxmp
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userid != null">userid,</if>
+            <if test="appid != null">appid,</if>
+            <if test="appsecret != null">appsecret,</if>
+            <if test="token != null">token,</if>
+            <if test="encodingaeskey != null">encodingaeskey,</if>
+            <if test="accessToken != null">access_token,</if>
+            <if test="accessTokenExpires != null">access_token_expires,</if>
+            <if test="jsapiTicket != null">jsapi_ticket,</if>
+            <if test="jsapiTicketExpires != null">jsapi_ticket_expires,</if>
+            <if test="mchid != null">mchid,</if>
+            <if test="mchkey != null">mchkey,</if>
+            <if test="sslCertPath != null">ssl_cert_path,</if>
+            <if test="appId != null">app_id,</if>
+            <if test="merchantPrivateKey != null">merchant_private_key,</if>
+            <if test="alipayPublicKey != null">alipay_public_key,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userid != null">#{userid},</if>
+            <if test="appid != null">#{appid},</if>
+            <if test="appsecret != null">#{appsecret},</if>
+            <if test="token != null">#{token},</if>
+            <if test="encodingaeskey != null">#{encodingaeskey},</if>
+            <if test="accessToken != null">#{accessToken},</if>
+            <if test="accessTokenExpires != null">#{accessTokenExpires},</if>
+            <if test="jsapiTicket != null">#{jsapiTicket},</if>
+            <if test="jsapiTicketExpires != null">#{jsapiTicketExpires},</if>
+            <if test="mchid != null">#{mchid},</if>
+            <if test="mchkey != null">#{mchkey},</if>
+            <if test="sslCertPath != null">#{sslCertPath},</if>
+            <if test="appId != null">#{appId},</if>
+            <if test="merchantPrivateKey != null">#{merchantPrivateKey},</if>
+            <if test="alipayPublicKey != null">#{alipayPublicKey},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisWxmp" parameterType="VrHisWxmp">
+        update vr_his_wxmp
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userid != null">userid = #{userid},</if>
+            <if test="appid != null">appid = #{appid},</if>
+            <if test="appsecret != null">appsecret = #{appsecret},</if>
+            <if test="token != null">token = #{token},</if>
+            <if test="encodingaeskey != null">encodingaeskey = #{encodingaeskey},</if>
+            <if test="accessToken != null">access_token = #{accessToken},</if>
+            <if test="accessTokenExpires != null">access_token_expires = #{accessTokenExpires},</if>
+            <if test="jsapiTicket != null">jsapi_ticket = #{jsapiTicket},</if>
+            <if test="jsapiTicketExpires != null">jsapi_ticket_expires = #{jsapiTicketExpires},</if>
+            <if test="mchid != null">mchid = #{mchid},</if>
+            <if test="mchkey != null">mchkey = #{mchkey},</if>
+            <if test="sslCertPath != null">ssl_cert_path = #{sslCertPath},</if>
+            <if test="appId != null">app_id = #{appId},</if>
+            <if test="merchantPrivateKey != null">merchant_private_key = #{merchantPrivateKey},</if>
+            <if test="alipayPublicKey != null">alipay_public_key = #{alipayPublicKey},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteVrHisWxmpById" parameterType="Integer">
+        delete from vr_his_wxmp where id = #{id}
+    </delete>
+
+    <delete id="deleteVrHisWxmpByIds" parameterType="String">
+        delete from vr_his_wxmp where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

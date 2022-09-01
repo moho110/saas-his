@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.xsystem.mapper.VrHisWxqrloginMapper">
+    
+    <resultMap type="VrHisWxqrlogin" id="VrHisWxqrloginResult">
+        <result property="id"    column="id"    />
+        <result property="addtime"    column="addtime"    />
+        <result property="enuid"    column="enuid"    />
+        <result property="status"    column="status"    />
+        <result property="createdate"    column="createdate"    />
+        <result property="openid"    column="openid"    />
+    </resultMap>
+
+    <sql id="selectVrHisWxqrloginVo">
+        select id, addtime, enuid, status, createdate, openid from vr_his_wxqrlogin
+    </sql>
+
+    <select id="selectVrHisWxqrloginList" parameterType="VrHisWxqrlogin" resultMap="VrHisWxqrloginResult">
+        <include refid="selectVrHisWxqrloginVo"/>
+        <where>  
+            <if test="addtime != null "> and addtime = #{addtime}</if>
+            <if test="enuid != null  and enuid != ''"> and enuid = #{enuid}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="createdate != null "> and createdate = #{createdate}</if>
+            <if test="openid != null  and openid != ''"> and openid = #{openid}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisWxqrloginById" parameterType="Long" resultMap="VrHisWxqrloginResult">
+        <include refid="selectVrHisWxqrloginVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertVrHisWxqrlogin" parameterType="VrHisWxqrlogin" useGeneratedKeys="true" keyProperty="id">
+        insert into vr_his_wxqrlogin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="addtime != null">addtime,</if>
+            <if test="enuid != null">enuid,</if>
+            <if test="status != null">status,</if>
+            <if test="createdate != null">createdate,</if>
+            <if test="openid != null">openid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="addtime != null">#{addtime},</if>
+            <if test="enuid != null">#{enuid},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createdate != null">#{createdate},</if>
+            <if test="openid != null">#{openid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisWxqrlogin" parameterType="VrHisWxqrlogin">
+        update vr_his_wxqrlogin
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="addtime != null">addtime = #{addtime},</if>
+            <if test="enuid != null">enuid = #{enuid},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createdate != null">createdate = #{createdate},</if>
+            <if test="openid != null">openid = #{openid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteVrHisWxqrloginById" parameterType="Long">
+        delete from vr_his_wxqrlogin where id = #{id}
+    </delete>
+
+    <delete id="deleteVrHisWxqrloginByIds" parameterType="String">
+        delete from vr_his_wxqrlogin where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

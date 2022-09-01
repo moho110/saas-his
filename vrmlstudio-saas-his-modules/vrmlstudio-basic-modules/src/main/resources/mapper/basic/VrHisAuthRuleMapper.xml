@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.department.mapper.VrHisAuthRuleMapper">
+    
+    <resultMap type="VrHisAuthRule" id="VrHisAuthRuleResult">
+        <result property="id"    column="id"    />
+        <result property="icon"    column="icon"    />
+        <result property="menuName"    column="menu_name"    />
+        <result property="title"    column="title"    />
+        <result property="pid"    column="pid"    />
+        <result property="isMenu"    column="is_menu"    />
+        <result property="isRaceMenu"    column="is_race_menu"    />
+        <result property="type"    column="type"    />
+        <result property="status"    column="status"    />
+        <result property="condition"    column="condition"    />
+        <result property="orderList"    column="order_list"    />
+    </resultMap>
+
+    <sql id="selectVrHisAuthRuleVo">
+        select id, icon, menu_name, title, pid, is_menu, is_race_menu, type, status, condition, order_list from vr_his_auth_rule
+    </sql>
+
+    <select id="selectVrHisAuthRuleList" parameterType="VrHisAuthRule" resultMap="VrHisAuthRuleResult">
+        <include refid="selectVrHisAuthRuleVo"/>
+        <where>  
+            <if test="icon != null  and icon != ''"> and icon = #{icon}</if>
+            <if test="menuName != null  and menuName != ''"> and menu_name like concat('%', #{menuName}, '%')</if>
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="pid != null "> and pid = #{pid}</if>
+            <if test="isMenu != null "> and is_menu = #{isMenu}</if>
+            <if test="isRaceMenu != null "> and is_race_menu = #{isRaceMenu}</if>
+            <if test="type != null "> and type = #{type}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="condition != null  and condition != ''"> and condition = #{condition}</if>
+            <if test="orderList != null "> and order_list = #{orderList}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisAuthRuleById" parameterType="Integer" resultMap="VrHisAuthRuleResult">
+        <include refid="selectVrHisAuthRuleVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertVrHisAuthRule" parameterType="VrHisAuthRule" useGeneratedKeys="true" keyProperty="id">
+        insert into vr_his_auth_rule
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="icon != null">icon,</if>
+            <if test="menuName != null and menuName != ''">menu_name,</if>
+            <if test="title != null and title != ''">title,</if>
+            <if test="pid != null">pid,</if>
+            <if test="isMenu != null">is_menu,</if>
+            <if test="isRaceMenu != null">is_race_menu,</if>
+            <if test="type != null">type,</if>
+            <if test="status != null">status,</if>
+            <if test="condition != null and condition != ''">condition,</if>
+            <if test="orderList != null">order_list,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="icon != null">#{icon},</if>
+            <if test="menuName != null and menuName != ''">#{menuName},</if>
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="pid != null">#{pid},</if>
+            <if test="isMenu != null">#{isMenu},</if>
+            <if test="isRaceMenu != null">#{isRaceMenu},</if>
+            <if test="type != null">#{type},</if>
+            <if test="status != null">#{status},</if>
+            <if test="condition != null and condition != ''">#{condition},</if>
+            <if test="orderList != null">#{orderList},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisAuthRule" parameterType="VrHisAuthRule">
+        update vr_his_auth_rule
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="icon != null">icon = #{icon},</if>
+            <if test="menuName != null and menuName != ''">menu_name = #{menuName},</if>
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="pid != null">pid = #{pid},</if>
+            <if test="isMenu != null">is_menu = #{isMenu},</if>
+            <if test="isRaceMenu != null">is_race_menu = #{isRaceMenu},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="condition != null and condition != ''">condition = #{condition},</if>
+            <if test="orderList != null">order_list = #{orderList},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteVrHisAuthRuleById" parameterType="Integer">
+        delete from vr_his_auth_rule where id = #{id}
+    </delete>
+
+    <delete id="deleteVrHisAuthRuleByIds" parameterType="String">
+        delete from vr_his_auth_rule where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.sales.mapper.VrHisCareHistoryMapper">
+    
+    <resultMap type="VrHisCareHistory" id="VrHisCareHistoryResult">
+        <result property="id"    column="id"    />
+        <result property="hospitalId"    column="hospital_id"    />
+        <result property="doctorId"    column="doctor_id"    />
+        <result property="patientId"    column="patient_id"    />
+        <result property="departmentId"    column="department_id"    />
+        <result property="typeId"    column="type_id"    />
+        <result property="isContagious"    column="is_contagious"    />
+        <result property="caseDate"    column="case_date"    />
+        <result property="addtime"    column="addtime"    />
+        <result property="caseCode"    column="case_code"    />
+        <result property="caseTitle"    column="case_title"    />
+        <result property="caseResult"    column="case_result"    />
+        <result property="doctorTips"    column="doctor_tips"    />
+        <result property="memo"    column="memo"    />
+    </resultMap>
+
+    <sql id="selectVrHisCareHistoryVo">
+        select id, hospital_id, doctor_id, patient_id, department_id, type_id, is_contagious, case_date, addtime, case_code, case_title, case_result, doctor_tips, memo from vr_his_care_history
+    </sql>
+
+    <select id="selectVrHisCareHistoryList" parameterType="VrHisCareHistory" resultMap="VrHisCareHistoryResult">
+        <include refid="selectVrHisCareHistoryVo"/>
+        <where>  
+            <if test="hospitalId != null "> and hospital_id = #{hospitalId}</if>
+            <if test="doctorId != null "> and doctor_id = #{doctorId}</if>
+            <if test="patientId != null "> and patient_id = #{patientId}</if>
+            <if test="departmentId != null "> and department_id = #{departmentId}</if>
+            <if test="typeId != null "> and type_id = #{typeId}</if>
+            <if test="isContagious != null "> and is_contagious = #{isContagious}</if>
+            <if test="caseDate != null "> and case_date = #{caseDate}</if>
+            <if test="addtime != null "> and addtime = #{addtime}</if>
+            <if test="caseCode != null  and caseCode != ''"> and case_code = #{caseCode}</if>
+            <if test="caseTitle != null  and caseTitle != ''"> and case_title = #{caseTitle}</if>
+            <if test="caseResult != null  and caseResult != ''"> and case_result = #{caseResult}</if>
+            <if test="doctorTips != null  and doctorTips != ''"> and doctor_tips = #{doctorTips}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisCareHistoryById" parameterType="Integer" resultMap="VrHisCareHistoryResult">
+        <include refid="selectVrHisCareHistoryVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertVrHisCareHistory" parameterType="VrHisCareHistory" useGeneratedKeys="true" keyProperty="id">
+        insert into vr_his_care_history
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="hospitalId != null">hospital_id,</if>
+            <if test="doctorId != null">doctor_id,</if>
+            <if test="patientId != null">patient_id,</if>
+            <if test="departmentId != null">department_id,</if>
+            <if test="typeId != null">type_id,</if>
+            <if test="isContagious != null">is_contagious,</if>
+            <if test="caseDate != null">case_date,</if>
+            <if test="addtime != null">addtime,</if>
+            <if test="caseCode != null">case_code,</if>
+            <if test="caseTitle != null">case_title,</if>
+            <if test="caseResult != null">case_result,</if>
+            <if test="doctorTips != null">doctor_tips,</if>
+            <if test="memo != null">memo,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="hospitalId != null">#{hospitalId},</if>
+            <if test="doctorId != null">#{doctorId},</if>
+            <if test="patientId != null">#{patientId},</if>
+            <if test="departmentId != null">#{departmentId},</if>
+            <if test="typeId != null">#{typeId},</if>
+            <if test="isContagious != null">#{isContagious},</if>
+            <if test="caseDate != null">#{caseDate},</if>
+            <if test="addtime != null">#{addtime},</if>
+            <if test="caseCode != null">#{caseCode},</if>
+            <if test="caseTitle != null">#{caseTitle},</if>
+            <if test="caseResult != null">#{caseResult},</if>
+            <if test="doctorTips != null">#{doctorTips},</if>
+            <if test="memo != null">#{memo},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisCareHistory" parameterType="VrHisCareHistory">
+        update vr_his_care_history
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="hospitalId != null">hospital_id = #{hospitalId},</if>
+            <if test="doctorId != null">doctor_id = #{doctorId},</if>
+            <if test="patientId != null">patient_id = #{patientId},</if>
+            <if test="departmentId != null">department_id = #{departmentId},</if>
+            <if test="typeId != null">type_id = #{typeId},</if>
+            <if test="isContagious != null">is_contagious = #{isContagious},</if>
+            <if test="caseDate != null">case_date = #{caseDate},</if>
+            <if test="addtime != null">addtime = #{addtime},</if>
+            <if test="caseCode != null">case_code = #{caseCode},</if>
+            <if test="caseTitle != null">case_title = #{caseTitle},</if>
+            <if test="caseResult != null">case_result = #{caseResult},</if>
+            <if test="doctorTips != null">doctor_tips = #{doctorTips},</if>
+            <if test="memo != null">memo = #{memo},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteVrHisCareHistoryById" parameterType="Integer">
+        delete from vr_his_care_history where id = #{id}
+    </delete>
+
+    <delete id="deleteVrHisCareHistoryByIds" parameterType="String">
+        delete from vr_his_care_history where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

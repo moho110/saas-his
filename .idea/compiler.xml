@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="vrmlstudio-admin" />
+        <module name="vrmlstudio-system" />
+        <module name="vrmlstudio-department-modules" />
+        <module name="vrmlstudio-xsystem-modules" />
+        <module name="vrmlstudio-tenant" />
+        <module name="vrmlstudio-medicine-modules" />
+        <module name="vrmlstudio-framework" />
+        <module name="vrmlstudio-crm" />
+        <module name="vrmlstudio-person-modules" />
+        <module name="vrmlstudio-common" />
+        <module name="vrmlstudio-basic-modules" />
+        <module name="vrmlstudio-sales-modules" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="saas-his" target="1.8" />
+      <module name="vrmlstudio-admin" target="1.8" />
+      <module name="vrmlstudio-basic-modules" target="1.8" />
+      <module name="vrmlstudio-common" target="1.8" />
+      <module name="vrmlstudio-crm" target="1.8" />
+      <module name="vrmlstudio-department-modules" target="1.8" />
+      <module name="vrmlstudio-framework" target="1.8" />
+      <module name="vrmlstudio-medicine-modules" target="1.8" />
+      <module name="vrmlstudio-person-modules" target="1.8" />
+      <module name="vrmlstudio-saas-his-modules" target="1.8" />
+      <module name="vrmlstudio-sales-modules" target="1.8" />
+      <module name="vrmlstudio-system" target="1.8" />
+      <module name="vrmlstudio-tenant" target="1.8" />
+      <module name="vrmlstudio-xsystem-modules" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

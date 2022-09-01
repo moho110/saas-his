@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.xsystem.mapper.VrHisOperationLogMapper">
+    
+    <resultMap type="VrHisOperationLog" id="VrHisOperationLogResult">
+        <result property="oid"    column="oid"    />
+        <result property="uid"    column="uid"    />
+        <result property="operation"    column="operation"    />
+        <result property="details"    column="details"    />
+        <result property="optime"    column="optime"    />
+    </resultMap>
+
+    <sql id="selectVrHisOperationLogVo">
+        select oid, uid, operation, details, optime from vr_his_operation_log
+    </sql>
+
+    <select id="selectVrHisOperationLogList" parameterType="VrHisOperationLog" resultMap="VrHisOperationLogResult">
+        <include refid="selectVrHisOperationLogVo"/>
+        <where>  
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="operation != null  and operation != ''"> and operation = #{operation}</if>
+            <if test="details != null  and details != ''"> and details = #{details}</if>
+            <if test="optime != null "> and optime = #{optime}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisOperationLogByOid" parameterType="Long" resultMap="VrHisOperationLogResult">
+        <include refid="selectVrHisOperationLogVo"/>
+        where oid = #{oid}
+    </select>
+        
+    <insert id="insertVrHisOperationLog" parameterType="VrHisOperationLog" useGeneratedKeys="true" keyProperty="oid">
+        insert into vr_his_operation_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uid != null">uid,</if>
+            <if test="operation != null and operation != ''">operation,</if>
+            <if test="details != null and details != ''">details,</if>
+            <if test="optime != null">optime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uid != null">#{uid},</if>
+            <if test="operation != null and operation != ''">#{operation},</if>
+            <if test="details != null and details != ''">#{details},</if>
+            <if test="optime != null">#{optime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisOperationLog" parameterType="VrHisOperationLog">
+        update vr_his_operation_log
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="operation != null and operation != ''">operation = #{operation},</if>
+            <if test="details != null and details != ''">details = #{details},</if>
+            <if test="optime != null">optime = #{optime},</if>
+        </trim>
+        where oid = #{oid}
+    </update>
+
+    <delete id="deleteVrHisOperationLogByOid" parameterType="Long">
+        delete from vr_his_operation_log where oid = #{oid}
+    </delete>
+
+    <delete id="deleteVrHisOperationLogByOids" parameterType="String">
+        delete from vr_his_operation_log where oid in 
+        <foreach item="oid" collection="array" open="(" separator="," close=")">
+            #{oid}
+        </foreach>
+    </delete>
+</mapper>

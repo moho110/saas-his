@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.xsystem.mapper.VrHisWxqrMapper">
+    
+    <resultMap type="VrHisWxqr" id="VrHisWxqrResult">
+        <result property="id"    column="id"    />
+        <result property="hospitalId"    column="hospital_id"    />
+        <result property="qrId"    column="qr_id"    />
+        <result property="url"    column="url"    />
+        <result property="appid"    column="appid"    />
+        <result property="userid"    column="userid"    />
+    </resultMap>
+
+    <sql id="selectVrHisWxqrVo">
+        select id, hospital_id, qr_id, url, appid, userid from vr_his_wxqr
+    </sql>
+
+    <select id="selectVrHisWxqrList" parameterType="VrHisWxqr" resultMap="VrHisWxqrResult">
+        <include refid="selectVrHisWxqrVo"/>
+        <where>  
+            <if test="hospitalId != null "> and hospital_id = #{hospitalId}</if>
+            <if test="qrId != null "> and qr_id = #{qrId}</if>
+            <if test="url != null  and url != ''"> and url = #{url}</if>
+            <if test="appid != null  and appid != ''"> and appid = #{appid}</if>
+            <if test="userid != null "> and userid = #{userid}</if>
+        </where>
+    </select>
+    
+    <select id="selectVrHisWxqrById" parameterType="Integer" resultMap="VrHisWxqrResult">
+        <include refid="selectVrHisWxqrVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertVrHisWxqr" parameterType="VrHisWxqr" useGeneratedKeys="true" keyProperty="id">
+        insert into vr_his_wxqr
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="hospitalId != null">hospital_id,</if>
+            <if test="qrId != null">qr_id,</if>
+            <if test="url != null">url,</if>
+            <if test="appid != null">appid,</if>
+            <if test="userid != null">userid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="hospitalId != null">#{hospitalId},</if>
+            <if test="qrId != null">#{qrId},</if>
+            <if test="url != null">#{url},</if>
+            <if test="appid != null">#{appid},</if>
+            <if test="userid != null">#{userid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVrHisWxqr" parameterType="VrHisWxqr">
+        update vr_his_wxqr
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="hospitalId != null">hospital_id = #{hospitalId},</if>
+            <if test="qrId != null">qr_id = #{qrId},</if>
+            <if test="url != null">url = #{url},</if>
+            <if test="appid != null">appid = #{appid},</if>
+            <if test="userid != null">userid = #{userid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteVrHisWxqrById" parameterType="Integer">
+        delete from vr_his_wxqr where id = #{id}
+    </delete>
+
+    <delete id="deleteVrHisWxqrByIds" parameterType="String">
+        delete from vr_his_wxqr where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
